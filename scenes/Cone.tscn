@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ctfenmoatfkgj"]
+
+[ext_resource type="Texture2D" uid="uid://dtaigcr641q5t" path="res://assets/objects/cone.png" id="1_fwv3b"]
+[ext_resource type="Script" uid="uid://dw5v2rh8qnsjg" path="res://scripts/cone.gd" id="1_ijqi7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_400sg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3unlm"]
+radius = 15.0
+
+[node name="Cone" type="RigidBody2D" unique_id=950632429]
+physics_material_override = SubResource("PhysicsMaterial_400sg")
+gravity_scale = 0.0
+linear_damp = 2.0
+angular_damp = 3.0
+script = ExtResource("1_ijqi7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700696872]
+shape = SubResource("CircleShape2D_3unlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1154889828]
+position = Vector2(1, -2)
+scale = Vector2(2.5714288, 2.5714288)
+texture = ExtResource("1_fwv3b")

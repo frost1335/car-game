@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dejl75roykg8v"]
+
+[ext_resource type="Script" uid="uid://c31xn3wlta2g" path="res://scripts/police_car.gd" id="1_c67tg"]
+[ext_resource type="Texture2D" uid="uid://dnvpvylrpct21" path="res://assets/police/police_regular.png" id="1_n3bdk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
+size = Vector2(38.000004, 82)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5y4u"]
+radius = 430.00464
+
+[node name="PoliceCar" type="CharacterBody2D" unique_id=418145021]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_c67tg")
+metadata/_edit_horizontal_guides_ = [392.0]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=524655835]
+position = Vector2(-8.000002, -40)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=645165263]
+z_index = 2
+scale = Vector2(2.2240038, 2.4924598)
+texture = ExtResource("1_n3bdk")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1743280726]
+position = Vector2(-8, -40)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1103075849]
+shape = SubResource("CircleShape2D_o5y4u")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

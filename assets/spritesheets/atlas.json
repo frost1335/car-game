@@ -1,0 +1,721 @@
+{
+ "meta": {
+  "project": "Top-down Pixel Car Game",
+  "tileSize": 48,
+  "note": "Cars face UP (north); rotate in code. Each category sheet has its own image file. Frame rects are {x,y,w,h} in pixels.",
+  "sheets": [
+   "cars",
+   "police",
+   "objects",
+   "tiles"
+  ]
+ },
+ "cars": {
+  "image": "cars.png",
+  "size": [
+   415,
+   58
+  ],
+  "frames": {
+   "van_white": {
+    "x": 1,
+    "y": 1,
+    "w": 30,
+    "h": 56
+   },
+   "pickup_tan": {
+    "x": 32,
+    "y": 1,
+    "w": 30,
+    "h": 54
+   },
+   "buggy_lime": {
+    "x": 63,
+    "y": 1,
+    "w": 30,
+    "h": 52
+   },
+   "classic_green": {
+    "x": 94,
+    "y": 1,
+    "w": 26,
+    "h": 52
+   },
+   "convertible_teal": {
+    "x": 121,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "coupe_purple": {
+    "x": 150,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "muscle_orange": {
+    "x": 179,
+    "y": 1,
+    "w": 30,
+    "h": 52
+   },
+   "roadster_black": {
+    "x": 210,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "sedan_red": {
+    "x": 239,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "sports_blue": {
+    "x": 268,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "suv_silver": {
+    "x": 297,
+    "y": 1,
+    "w": 30,
+    "h": 52
+   },
+   "taxi_yellow": {
+    "x": 328,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "hatchback_green": {
+    "x": 357,
+    "y": 1,
+    "w": 28,
+    "h": 48
+   },
+   "compact_pink": {
+    "x": 386,
+    "y": 1,
+    "w": 28,
+    "h": 44
+   }
+  }
+ },
+ "police": {
+  "image": "police.png",
+  "size": [
+   156,
+   62
+  ],
+  "frames": {
+   "police_riot": {
+    "x": 1,
+    "y": 1,
+    "w": 34,
+    "h": 60
+   },
+   "police_blocker": {
+    "x": 36,
+    "y": 1,
+    "w": 32,
+    "h": 52
+   },
+   "police_chaser": {
+    "x": 69,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "police_regular": {
+    "x": 98,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "police_cutter": {
+    "x": 127,
+    "y": 1,
+    "w": 28,
+    "h": 48
+   }
+  }
+ },
+ "objects": {
+  "image": "objects.png",
+  "size": [
+   409,
+   123
+  ],
+  "frames": {
+   "building_gray": {
+    "x": 1,
+    "y": 1,
+    "w": 66,
+    "h": 82
+   },
+   "building_tan": {
+    "x": 68,
+    "y": 1,
+    "w": 66,
+    "h": 82
+   },
+   "house_blue": {
+    "x": 135,
+    "y": 1,
+    "w": 42,
+    "h": 54
+   },
+   "house_red": {
+    "x": 178,
+    "y": 1,
+    "w": 42,
+    "h": 54
+   },
+   "fence_rail_v": {
+    "x": 221,
+    "y": 1,
+    "w": 14,
+    "h": 48
+   },
+   "fence_wood_v": {
+    "x": 236,
+    "y": 1,
+    "w": 14,
+    "h": 48
+   },
+   "tree_autumn": {
+    "x": 251,
+    "y": 1,
+    "w": 46,
+    "h": 46
+   },
+   "tree_oak": {
+    "x": 298,
+    "y": 1,
+    "w": 46,
+    "h": 46
+   },
+   "tree_pine": {
+    "x": 345,
+    "y": 1,
+    "w": 46,
+    "h": 46
+   },
+   "rock_big": {
+    "x": 1,
+    "y": 84,
+    "w": 38,
+    "h": 38
+   },
+   "rock_med": {
+    "x": 40,
+    "y": 84,
+    "w": 28,
+    "h": 28
+   },
+   "bush_a": {
+    "x": 69,
+    "y": 84,
+    "w": 30,
+    "h": 26
+   },
+   "bush_b": {
+    "x": 100,
+    "y": 84,
+    "w": 30,
+    "h": 26
+   },
+   "lamp": {
+    "x": 131,
+    "y": 84,
+    "w": 22,
+    "h": 22
+   },
+   "rock_small": {
+    "x": 154,
+    "y": 84,
+    "w": 20,
+    "h": 20
+   },
+   "sign": {
+    "x": 175,
+    "y": 84,
+    "w": 16,
+    "h": 18
+   },
+   "barricade": {
+    "x": 192,
+    "y": 84,
+    "w": 44,
+    "h": 16
+   },
+   "hydrant": {
+    "x": 237,
+    "y": 84,
+    "w": 14,
+    "h": 16
+   },
+   "bench": {
+    "x": 252,
+    "y": 84,
+    "w": 28,
+    "h": 14
+   },
+   "cone": {
+    "x": 281,
+    "y": 84,
+    "w": 14,
+    "h": 14
+   },
+   "fence_rail": {
+    "x": 296,
+    "y": 84,
+    "w": 48,
+    "h": 14
+   },
+   "fence_wood": {
+    "x": 345,
+    "y": 84,
+    "w": 48,
+    "h": 14
+   },
+   "manhole": {
+    "x": 394,
+    "y": 84,
+    "w": 14,
+    "h": 14
+   }
+  }
+ },
+ "tiles": {
+  "image": "tiles.png",
+  "size": [
+   491,
+   344
+  ],
+  "frames": {
+   "grass_ground_a": {
+    "x": 1,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_ground_b": {
+    "x": 50,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_straight_v": {
+    "x": 99,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_straight_h": {
+    "x": 148,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_corner_ne": {
+    "x": 197,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_corner_se": {
+    "x": 246,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_corner_sw": {
+    "x": 295,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_corner_nw": {
+    "x": 344,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_t_e": {
+    "x": 393,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_t_s": {
+    "x": 442,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_t_w": {
+    "x": 1,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_t_n": {
+    "x": 50,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_cross": {
+    "x": 99,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_cap_n": {
+    "x": 148,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_cap_e": {
+    "x": 197,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_cap_s": {
+    "x": 246,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_cap_w": {
+    "x": 295,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_crosswalk_v": {
+    "x": 344,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "grass_road_crosswalk_h": {
+    "x": 393,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "sand_ground_a": {
+    "x": 442,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "sand_ground_b": {
+    "x": 1,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_straight_v": {
+    "x": 50,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_straight_h": {
+    "x": 99,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_corner_ne": {
+    "x": 148,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_corner_se": {
+    "x": 197,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_corner_sw": {
+    "x": 246,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_corner_nw": {
+    "x": 295,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_t_e": {
+    "x": 344,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_t_s": {
+    "x": 393,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_t_w": {
+    "x": 442,
+    "y": 99,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_t_n": {
+    "x": 1,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_cross": {
+    "x": 50,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_cap_n": {
+    "x": 99,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_cap_e": {
+    "x": 148,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_cap_s": {
+    "x": 197,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_cap_w": {
+    "x": 246,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_crosswalk_v": {
+    "x": 295,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "sand_road_crosswalk_h": {
+    "x": 344,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "stone_ground_a": {
+    "x": 393,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "stone_ground_b": {
+    "x": 442,
+    "y": 148,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_straight_v": {
+    "x": 1,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_straight_h": {
+    "x": 50,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_corner_ne": {
+    "x": 99,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_corner_se": {
+    "x": 148,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_corner_sw": {
+    "x": 197,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_corner_nw": {
+    "x": 246,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_t_e": {
+    "x": 295,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_t_s": {
+    "x": 344,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_t_w": {
+    "x": 393,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_t_n": {
+    "x": 442,
+    "y": 197,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_cross": {
+    "x": 1,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_cap_n": {
+    "x": 50,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_cap_e": {
+    "x": 99,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_cap_s": {
+    "x": 148,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_cap_w": {
+    "x": 197,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_crosswalk_v": {
+    "x": 246,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "stone_road_crosswalk_h": {
+    "x": 295,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "water_full": {
+    "x": 344,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_n": {
+    "x": 393,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_e": {
+    "x": 442,
+    "y": 246,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_s": {
+    "x": 1,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_w": {
+    "x": 50,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_outer_ne": {
+    "x": 99,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_outer_se": {
+    "x": 148,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_outer_sw": {
+    "x": 197,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_outer_nw": {
+    "x": 246,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_inner_ne": {
+    "x": 295,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_inner_se": {
+    "x": 344,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_inner_sw": {
+    "x": 393,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   },
+   "water_inner_nw": {
+    "x": 442,
+    "y": 295,
+    "w": 48,
+    "h": 48
+   }
+  }
+ }
+}

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bl0gm6e0e6xxk"]
+
+[ext_resource type="Script" uid="uid://c6bd048xyi3d8" path="res://scripts/game_over.gd" id="1_6bcno"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3unlm"]
+line_spacing = 0.0
+
+[node name="GameOver" type="CanvasLayer" unique_id=532564579]
+script = ExtResource("1_6bcno")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1512750580]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4392157)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=82018267]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="Center" unique_id=878221217]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Box" unique_id=1159174918]
+layout_mode = 2
+text = "BUSTED"
+label_settings = SubResource("LabelSettings_3unlm")
+
+[node name="RestartButton" type="Button" parent="Center/Box" unique_id=799648835]
+layout_mode = 2
+text = "Restart"

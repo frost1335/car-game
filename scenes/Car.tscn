@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dgpqs50mrwih5"]
+
+[ext_resource type="Script" uid="uid://cgniwo785bdmw" path="res://scripts/car.gd" id="1_7u4s5"]
+[ext_resource type="Texture2D" uid="uid://bogbivbjwfx70" path="res://assets/cars/buggy_lime.png" id="2_ys5ts"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
+size = Vector2(92, 40)
+
+[node name="Car" type="CharacterBody2D" unique_id=1911748893]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_7u4s5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
+z_index = 5
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=884641444]
+position = Vector2(0, -1.1444092e-05)
+rotation = 1.5707964
+scale = Vector2(2.4214091, 2.5302548)
+texture = ExtResource("2_ys5ts")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=151300935]
+zoom = Vector2(0.5, 0.5)
