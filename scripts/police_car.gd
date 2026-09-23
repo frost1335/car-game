@@ -97,7 +97,7 @@ func _chase() -> void:
 	var max_steer := deg_to_rad(steering_angle)
 	var max_steer_avoid := deg_to_rad(steering_angle + 5)
 	var chosenn_deg := INF
-	var directions: Array[int] = []
+	var directions: Array[float] = []
 	
 	steer_direction = clamp(transform.x.angle_to(to_target), -max_steer, max_steer)
 	acceleration = transform.x * engine_power
@@ -106,8 +106,11 @@ func _chase() -> void:
 		var to_object = object.global_position - global_position
 		var obj_deg = rad_to_deg(transform.x.angle_to(to_object))
 		var target_deg = rad_to_deg(transform.x.angle_to(to_target))
-		var distance = min(transform.x.distance_to(to_object), 430)
-		var distance_multiplier = 1 - (((distance - 210) / 220) / 1.4) # 430 - 210 = 220
+		var distance = min(to_object.length(), 430)
+		var distance_multiplier = min(1 - (((distance - 210) / 220) / 1.4), 1.3) # 430 - 210 = 220
+
+		# reset chosen direction
+		chosenn_deg = INF
 	
 		if obj_deg < 70 and obj_deg >= 0:
 			if target_deg > obj_deg:
