@@ -6,6 +6,7 @@
 size = Vector2(138, 174)
 
 [node name="House" type="StaticBody2D" unique_id=802393800]
+metadata/radius = 105.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=945646786]
 shape = SubResource("RectangleShape2D_qtlar")

@@ -7,7 +7,7 @@
 size = Vector2(38.000004, 82)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o5y4u"]
-radius = 430.00464
+radius = 448.0402
 
 [node name="PoliceCar" type="CharacterBody2D" unique_id=418145021]
 collision_layer = 4

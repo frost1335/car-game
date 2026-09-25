@@ -14,6 +14,7 @@ gravity_scale = 0.0
 linear_damp = 2.0
 angular_damp = 3.0
 script = ExtResource("1_ijqi7")
+metadata/radius = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700696872]
 shape = SubResource("CircleShape2D_3unlm")
