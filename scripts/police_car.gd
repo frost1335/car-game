@@ -24,6 +24,7 @@ extends CharacterBody2D
 @export var impact_speed_loss: float = 0.6    # fraction of speed scrubbed on a full head-on hit
 @export var push_scale: float = 0.8           # impulse applied to RigidBody2D props
 @export var wreck_impact_speed: float = 250.0 # at or above this -> destroyed
+@export var steer_rate := 2.0
 
 # Nearby objects list
 var nearby: Array[Node2D] = []
@@ -37,7 +38,6 @@ var acceleration: Vector2 = Vector2.ZERO
 var steer_direction: float = 0.0
 var dead: bool = false
 var chasing: bool = true
-
 
 func _ready() -> void:
 	add_to_group("police")
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		
 	acceleration = Vector2.ZERO
 	if chasing and target and is_instance_valid(target):
-		_chase()
+		_chase(delta)
 	else:
 		_pull_over()
 	_apply_resistance(delta)
@@ -92,47 +92,45 @@ func _pull_over() -> void:
 	acceleration = -velocity.normalized() * arrest_brake
 
 
-func _chase() -> void:
+func _chase(delta) -> void:
 	var to_target := target.global_position - global_position
 	var max_steer := deg_to_rad(steering_angle)
 	var max_steer_avoid := deg_to_rad(steering_angle + 4)
 	var chosenn_deg := INF
 	var directions: Array[float] = []
 	
-	steer_direction = clamp(transform.x.angle_to(to_target), -max_steer, max_steer)
 	acceleration = transform.x * engine_power
 	
 	for object in nearby:
 		var to_object = object.global_position - global_position
 		var obj_deg = rad_to_deg(transform.x.angle_to(to_object))
 		var target_deg = rad_to_deg(transform.x.angle_to(to_target))
+		
 		var radius = object.get_meta("radius")
+		var distance = to_object.length()
+		
+		var half_angular = rad_to_deg(asin(radius / distance))
+		var margin = 30.0
 
-		var point_angle = rad_to_deg(asin(radius / to_object.length())) + 20
-		
-		print(point_angle)
-		
 		# reset chosen direction
 		chosenn_deg = INF
 	
-		if obj_deg < 60 and obj_deg >= 0:
+		if abs(obj_deg) < half_angular + margin:
 			if target_deg > obj_deg:
-				chosenn_deg = obj_deg + point_angle
+				chosenn_deg = obj_deg + (half_angular + 60.0)
 			else:
-				chosenn_deg =obj_deg - point_angle
-		
-		if obj_deg < 0 and obj_deg > -60:
-			if target_deg > obj_deg:
-				chosenn_deg = obj_deg + point_angle
-			else:
-				chosenn_deg = obj_deg - point_angle
-		
+				chosenn_deg = obj_deg - (half_angular + 60.0)
+
 		if chosenn_deg != INF:
 			directions.append(chosenn_deg)
 	
 	if directions.size():
 		var final_direction = (directions.max() + directions.min()) / 2
-		steer_direction = clamp(deg_to_rad(final_direction), -max_steer_avoid, max_steer_avoid)
+		var desired = clamp(deg_to_rad(final_direction), -max_steer_avoid, max_steer_avoid)
+		
+		steer_direction = move_toward(steer_direction, desired, steer_rate * delta)
+	else:
+		steer_direction = clamp(transform.x.angle_to(to_target), -max_steer, max_steer)
 
 func _resolve_contacts() -> void:
 	for i in get_slide_collision_count():
