@@ -141,8 +141,8 @@ func _resolve_contacts() -> void:
 
 		if other.is_in_group("player"):
 			# The player owns the bust state; it guards against double-firing.
-			if other.has_method("bust"):
-				other.bust()
+			if other.has_method("wreck"):
+				other.wreck()
 
 		elif other.is_in_group("police"):
 			if _closing_speed(c, other) >= explode_impact_speed:
