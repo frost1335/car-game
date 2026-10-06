@@ -1,16 +1,12 @@
 extends Car
 
-# --- Movement (same bicycle model as the player car) ---
-@export var engine_power: float = 700.0
-@export var max_speed: float = 900.0
-
 # --- Crash ---
 # Minimum CLOSING speed (px/s) along the contact normal to wreck.
 # Low value = cruisers detonate constantly. Tune against your top speed (~500).
-@export var explode_impact_speed: float = 120.0
+@export var explode_impact_speed: float = 80.0
 
 # --- Arrest ---
-@export var arrest_brake: float = 400.0         # how hard we stop once the player is caught
+@export var arrest_brake: float = 350.0         # how hard we stop once the player is caught
 
 # --- Obstacle impacts ---
 @export var steer_rate := 2.0
@@ -27,18 +23,6 @@ var dead: bool = false
 var chasing: bool = true
 
 func _ready() -> void:
-	friction = -55.0
-	drag = -0.06
-	steering_angle = 12.0
-	wheel_base = 70.0
-	traction_slow = 0.7
-	traction_fast = 0.1
-	traction_speed_threshold = 200.0
-	min_impact_speed = 100.0
-	impact_speed_loss = 0.6
-	push_scale = 0.8
-	wreck_impact_speed = 250.0 
-
 	add_to_group("police")
 	target = get_tree().get_first_node_in_group("player")
 

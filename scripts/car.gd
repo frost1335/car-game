@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Car
 
 # - Engine / movement -
+@export var engine_power: float = 800.0
+@export var max_speed := 900.0
 @export var max_reverse_speed: float = 250.0
 
 # - Steering (bicycle model) -

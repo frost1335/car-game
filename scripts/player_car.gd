@@ -1,9 +1,7 @@
 extends Car 
 
-# --- Engine / movement ---
-@export var engine_power: float = 800.0
+# - Braking -
 @export var braking: float = -450.0
-@export var max_speed := 900.0
 
 # --- Handbrake / drifting ---
 @export var handbrake_steering_mult: float = 1.6
