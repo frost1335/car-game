@@ -34,6 +34,23 @@ var steer_direction: float = 0.0
 var acceleration: Vector2 = Vector2.ZERO
 var handbraking: bool = false
 
+func _physics_process(delta: float) -> void:
+	acceleration = Vector2.ZERO
+
+	_drive(delta)
+
+	_apply_resistance(delta)
+
+	_calculate_steering(delta)
+	
+	velocity += acceleration * delta
+
+	var pre_move_velocity := velocity
+
+	velocity = velocity.limit_length(max_speed)
+
+	move_and_slide()
+
 func _apply_resistance(delta: float) -> void:
 	if velocity.length() < 5.0:
 		velocity = Vector2.ZERO
@@ -102,3 +119,7 @@ func _calculate_steering(delta: float) -> void:
 		velocity = -new_heading * min(velocity.length(), max_reverse_speed)
 
 	rotation = new_heading.angle()
+
+
+func _drive(_delta: float) -> void:
+	pass
