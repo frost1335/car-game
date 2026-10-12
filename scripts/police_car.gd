@@ -1,8 +1,5 @@
 extends Car
 
-# --- Crash ---
-# Minimum CLOSING speed (px/s) along the contact normal to wreck.
-# Low value = cruisers detonate constantly. Tune against your top speed (~500).
 @export var explode_impact_speed: float = 80.0
 
 # --- Arrest ---
@@ -19,7 +16,6 @@ var nearby: Array[Node2D] = []
 signal exploded(at_position: Vector2)
 
 var target: Node2D = null
-var dead: bool = false
 var chasing: bool = true
 
 func _ready() -> void:
@@ -34,32 +30,17 @@ func _ready() -> void:
 		if target.has_method("is_busted") and target.is_busted():
 			chasing = false
 
-func _physics_process(delta: float) -> void:
-	# queue_free() is DEFERRED to end of frame, so a wrecked car can still get
-	# one more physics tick. This flag -- not is_instance_valid() -- is the guard.
-	if dead:
+func _drive(delta: float) -> void:
+	if _dead:
 		return
-		
-	acceleration = Vector2.ZERO
+
 	if chasing and target and is_instance_valid(target):
 		_chase(delta)
 	else:
 		_pull_over()
-	_apply_resistance(delta)
-	_calculate_steering(delta)
 
-	velocity += acceleration * delta
-
-	var pre_move_velocity := velocity
-
-	velocity = velocity.limit_length(max_speed)
-
-	move_and_slide()
-
+func _post_move() -> void:
 	_resolve_contacts()
-
-	if not dead:
-		_handle_obstacle_impacts(pre_move_velocity, explode)
 
 func _on_player_busted() -> void:
 	# Caught them. We are NOT wrecked -- different outcome, different path.
@@ -81,11 +62,14 @@ func _chase(delta) -> void:
 	acceleration = transform.x * engine_power
 	
 	for object in nearby:
+		if not is_instance_valid(object):
+			continue
+		
 		var to_object = object.global_position - global_position
 		var obj_deg = rad_to_deg(transform.x.angle_to(to_object))
 		var target_deg = rad_to_deg(transform.x.angle_to(to_target))
 		
-		var radius = object.get_meta("radius")
+		var radius = object.get_meta("radius", 20.0) # 20.0 is a default
 		var distance = to_object.length()
 		
 		var half_angular = rad_to_deg(asin(radius / distance))
@@ -127,9 +111,9 @@ func _resolve_contacts() -> void:
 			if _closing_speed(c, other) >= explode_impact_speed:
 				# Whoever DETECTS the pair wrecks BOTH -- a stationary car that
 				# gets rammed reports no slide collision of its own.
-				explode()
-				if other.has_method("explode"):
-					other.explode()
+				_destroy()
+				if other.has_method("_destroy"):
+					other._destroy()
 				return       # we're dead; stop reading collisions
 
 func _closing_speed(c: KinematicCollision2D, other: Object) -> float:
@@ -140,10 +124,10 @@ func _closing_speed(c: KinematicCollision2D, other: Object) -> float:
 	# A side-swipe at speed projects to ~0 -> scrape, not explosion.
 	return absf((velocity - other_vel).dot(c.get_normal()))
 
-func explode() -> void:
-	if dead:      # idempotent -- safe to call from the other car
+func _destroy() -> void:
+	if _dead:      # idempotent -- safe to call from the other car
 		return
-	dead = true
+	_dead = true
 	exploded.emit(global_position)
 	queue_free()
 
@@ -152,4 +136,6 @@ func _on_area_2d_body_entered(obj: Node2D) -> void:
 
 func _on_area_2d_body_exited(obj: Node2D) -> void:
 	var idx = nearby.find(obj)
-	nearby.remove_at(idx)
+
+	if idx != -1:
+		nearby.remove_at(idx)

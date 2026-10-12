@@ -34,6 +34,8 @@ var steer_direction: float = 0.0
 var acceleration: Vector2 = Vector2.ZERO
 var handbraking: bool = false
 
+var _dead: bool = false
+
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
 
@@ -51,6 +53,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	_post_move()
+
+	if not _dead:
+		_handle_obstacle_impacts(pre_move_velocity)
+
 func _apply_resistance(delta: float) -> void:
 	if velocity.length() < 5.0:
 		velocity = Vector2.ZERO
@@ -61,7 +68,7 @@ func _apply_resistance(delta: float) -> void:
 	if handbraking:
 		acceleration += velocity * handbrake_friction * delta
 
-func _handle_obstacle_impacts(pre_velocity: Vector2, explode: Callable) -> void:
+func _handle_obstacle_impacts(pre_velocity: Vector2) -> void:
 	for i in get_slide_collision_count():
 		var c := get_slide_collision(i)
 		var other := c.get_collider()
@@ -88,7 +95,7 @@ func _handle_obstacle_impacts(pre_velocity: Vector2, explode: Callable) -> void:
 
 		# Hard enough hit -> destroyed
 		if impact >= wreck_impact_speed:
-			explode.call()
+			_destroy()
 			return
 
 		# Survivable hit -> just lose speed
@@ -122,4 +129,10 @@ func _calculate_steering(delta: float) -> void:
 
 
 func _drive(_delta: float) -> void:
+	pass
+
+func _post_move() -> void:
+	pass
+
+func _destroy() -> void:
 	pass
