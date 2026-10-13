@@ -7,7 +7,15 @@
    "cars",
    "police",
    "objects",
-   "tiles"
+   "tiles",
+   "fx",
+   "lights",
+   "anim",
+   "ui",
+   "finish",
+   "props",
+   "structures",
+   "wrecks"
   ]
  },
  "cars": {
@@ -715,6 +723,1533 @@
     "y": 295,
     "w": 48,
     "h": 48
+   }
+  }
+ },
+ "fx": {
+  "image": "fx.png",
+  "size": [
+   318,
+   277
+  ],
+  "note": "Explosions/dust/smoke/skids/trails/wheels/debris. Draw glow-ish frames (explode*, trail*, dust*) with additive or normal alpha; skid marks belong on the ground layer under the cars.",
+  "frames": {
+   "explode_01": {
+    "x": 1,
+    "y": 1,
+    "w": 64,
+    "h": 64
+   },
+   "explode_02": {
+    "x": 66,
+    "y": 1,
+    "w": 64,
+    "h": 64
+   },
+   "explode_03": {
+    "x": 131,
+    "y": 1,
+    "w": 64,
+    "h": 64
+   },
+   "explode_04": {
+    "x": 196,
+    "y": 1,
+    "w": 64,
+    "h": 64
+   },
+   "explode_05": {
+    "x": 1,
+    "y": 66,
+    "w": 64,
+    "h": 64
+   },
+   "explode_06": {
+    "x": 66,
+    "y": 66,
+    "w": 64,
+    "h": 64
+   },
+   "explode_07": {
+    "x": 131,
+    "y": 66,
+    "w": 64,
+    "h": 64
+   },
+   "explode_08": {
+    "x": 196,
+    "y": 66,
+    "w": 64,
+    "h": 64
+   },
+   "explode_09": {
+    "x": 1,
+    "y": 131,
+    "w": 64,
+    "h": 64
+   },
+   "skid_straight": {
+    "x": 66,
+    "y": 131,
+    "w": 48,
+    "h": 48
+   },
+   "skid_curve": {
+    "x": 115,
+    "y": 131,
+    "w": 48,
+    "h": 48
+   },
+   "skid_short": {
+    "x": 164,
+    "y": 131,
+    "w": 48,
+    "h": 48
+   },
+   "trail_speed": {
+    "x": 213,
+    "y": 131,
+    "w": 26,
+    "h": 44
+   },
+   "trail_boost": {
+    "x": 240,
+    "y": 131,
+    "w": 26,
+    "h": 44
+   },
+   "smolder_01": {
+    "x": 267,
+    "y": 131,
+    "w": 26,
+    "h": 34
+   },
+   "smolder_02": {
+    "x": 1,
+    "y": 196,
+    "w": 26,
+    "h": 34
+   },
+   "smolder_03": {
+    "x": 28,
+    "y": 196,
+    "w": 26,
+    "h": 34
+   },
+   "smolder_04": {
+    "x": 55,
+    "y": 196,
+    "w": 26,
+    "h": 34
+   },
+   "explode_small_01": {
+    "x": 82,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "explode_small_02": {
+    "x": 115,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "explode_small_03": {
+    "x": 148,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "explode_small_04": {
+    "x": 181,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "explode_small_05": {
+    "x": 214,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "explode_small_06": {
+    "x": 247,
+    "y": 196,
+    "w": 32,
+    "h": 32
+   },
+   "tiresmoke_01": {
+    "x": 280,
+    "y": 196,
+    "w": 24,
+    "h": 24
+   },
+   "tiresmoke_02": {
+    "x": 1,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "tiresmoke_03": {
+    "x": 26,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "tiresmoke_04": {
+    "x": 51,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "tiresmoke_05": {
+    "x": 76,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "tiresmoke_06": {
+    "x": 101,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_01": {
+    "x": 126,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_02": {
+    "x": 151,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_03": {
+    "x": 176,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_04": {
+    "x": 201,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_05": {
+    "x": 226,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "splash_06": {
+    "x": 251,
+    "y": 231,
+    "w": 24,
+    "h": 24
+   },
+   "dust_01": {
+    "x": 276,
+    "y": 231,
+    "w": 20,
+    "h": 20
+   },
+   "dust_02": {
+    "x": 297,
+    "y": 231,
+    "w": 20,
+    "h": 20
+   },
+   "dust_03": {
+    "x": 1,
+    "y": 256,
+    "w": 20,
+    "h": 20
+   },
+   "dust_04": {
+    "x": 22,
+    "y": 256,
+    "w": 20,
+    "h": 20
+   },
+   "dust_05": {
+    "x": 43,
+    "y": 256,
+    "w": 20,
+    "h": 20
+   },
+   "dust_06": {
+    "x": 64,
+    "y": 256,
+    "w": 20,
+    "h": 20
+   },
+   "debris_door": {
+    "x": 85,
+    "y": 256,
+    "w": 10,
+    "h": 16
+   },
+   "wheel_spin_1": {
+    "x": 96,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_spin_2": {
+    "x": 105,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_spin_3": {
+    "x": 114,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_spin_4": {
+    "x": 123,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_hub": {
+    "x": 132,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_broken": {
+    "x": 141,
+    "y": 256,
+    "w": 8,
+    "h": 14
+   },
+   "wheel_loose_1": {
+    "x": 150,
+    "y": 256,
+    "w": 14,
+    "h": 14
+   },
+   "wheel_loose_2": {
+    "x": 165,
+    "y": 256,
+    "w": 14,
+    "h": 14
+   },
+   "wheel_loose_3": {
+    "x": 180,
+    "y": 256,
+    "w": 14,
+    "h": 14
+   },
+   "wheel_loose_4": {
+    "x": 195,
+    "y": 256,
+    "w": 14,
+    "h": 14
+   },
+   "debris_hood": {
+    "x": 210,
+    "y": 256,
+    "w": 14,
+    "h": 12
+   },
+   "debris_glass": {
+    "x": 225,
+    "y": 256,
+    "w": 12,
+    "h": 10
+   },
+   "debris_chunk": {
+    "x": 238,
+    "y": 256,
+    "w": 8,
+    "h": 8
+   },
+   "debris_bumper": {
+    "x": 247,
+    "y": 256,
+    "w": 16,
+    "h": 6
+   }
+  }
+ },
+ "lights": {
+  "image": "lights.png",
+  "size": [
+   302,
+   135
+  ],
+  "note": "Draw ALL of these with additive blending (globalCompositeOperation = \"lighter\"). beam_* point north like the cars: anchor the beam mouth at the headlight and rotate with the body.",
+  "frames": {
+   "beam_high": {
+    "x": 1,
+    "y": 1,
+    "w": 56,
+    "h": 92
+   },
+   "strobe_red": {
+    "x": 58,
+    "y": 1,
+    "w": 72,
+    "h": 72
+   },
+   "strobe_blue": {
+    "x": 131,
+    "y": 1,
+    "w": 72,
+    "h": 72
+   },
+   "beam_low": {
+    "x": 204,
+    "y": 1,
+    "w": 40,
+    "h": 62
+   },
+   "lamp_pool": {
+    "x": 245,
+    "y": 1,
+    "w": 56,
+    "h": 56
+   },
+   "beam_fog": {
+    "x": 1,
+    "y": 94,
+    "w": 44,
+    "h": 40
+   },
+   "lamp_siren_red": {
+    "x": 46,
+    "y": 94,
+    "w": 26,
+    "h": 26
+   },
+   "lamp_siren_blue": {
+    "x": 73,
+    "y": 94,
+    "w": 26,
+    "h": 26
+   },
+   "lamp_brake": {
+    "x": 100,
+    "y": 94,
+    "w": 13,
+    "h": 13
+   },
+   "lamp_head": {
+    "x": 114,
+    "y": 94,
+    "w": 11,
+    "h": 11
+   },
+   "lamp_reverse": {
+    "x": 126,
+    "y": 94,
+    "w": 11,
+    "h": 11
+   },
+   "lamp_indicator": {
+    "x": 138,
+    "y": 94,
+    "w": 11,
+    "h": 11
+   },
+   "lamp_indicator_off": {
+    "x": 150,
+    "y": 94,
+    "w": 11,
+    "h": 11
+   },
+   "lamp_tail": {
+    "x": 162,
+    "y": 94,
+    "w": 9,
+    "h": 9
+   },
+   "lightbar_1": {
+    "x": 172,
+    "y": 94,
+    "w": 15,
+    "h": 8
+   },
+   "lightbar_2": {
+    "x": 188,
+    "y": 94,
+    "w": 15,
+    "h": 8
+   },
+   "lightbar_3": {
+    "x": 204,
+    "y": 94,
+    "w": 15,
+    "h": 8
+   },
+   "lightbar_4": {
+    "x": 220,
+    "y": 94,
+    "w": 15,
+    "h": 8
+   }
+  }
+ },
+ "anim": {
+  "image": "anim.png",
+  "size": [
+   315,
+   116
+  ],
+  "note": "Looping world animation. water_* are seamless 48px tiles (4 frames, ~8fps). wheel_<c|l15|l30|r15|r30>_<1-4>: steering angle + tread spin, drawn on top of the car body at the wheel anchors.",
+  "frames": {
+   "water_full_1": {
+    "x": 1,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_full_2": {
+    "x": 50,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_full_3": {
+    "x": 99,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_full_4": {
+    "x": 148,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_1": {
+    "x": 197,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_2": {
+    "x": 246,
+    "y": 1,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_3": {
+    "x": 1,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "water_edge_4": {
+    "x": 50,
+    "y": 50,
+    "w": 48,
+    "h": 48
+   },
+   "lamp_bright": {
+    "x": 99,
+    "y": 50,
+    "w": 22,
+    "h": 22
+   },
+   "lamp_dim": {
+    "x": 122,
+    "y": 50,
+    "w": 22,
+    "h": 22
+   },
+   "wheel_l30_1": {
+    "x": 145,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l30_2": {
+    "x": 162,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l30_3": {
+    "x": 179,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l30_4": {
+    "x": 196,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l15_1": {
+    "x": 213,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l15_2": {
+    "x": 230,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l15_3": {
+    "x": 247,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_l15_4": {
+    "x": 264,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_c_1": {
+    "x": 281,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_c_2": {
+    "x": 298,
+    "y": 50,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_c_3": {
+    "x": 1,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_c_4": {
+    "x": 18,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r15_1": {
+    "x": 35,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r15_2": {
+    "x": 52,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r15_3": {
+    "x": 69,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r15_4": {
+    "x": 86,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r30_1": {
+    "x": 103,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r30_2": {
+    "x": 120,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r30_3": {
+    "x": 137,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "wheel_r30_4": {
+    "x": 154,
+    "y": 99,
+    "w": 16,
+    "h": 16
+   },
+   "barrel_roll_1": {
+    "x": 171,
+    "y": 99,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_roll_2": {
+    "x": 186,
+    "y": 99,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_roll_3": {
+    "x": 201,
+    "y": 99,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_roll_4": {
+    "x": 216,
+    "y": 99,
+    "w": 14,
+    "h": 14
+   }
+  }
+ },
+ "ui": {
+  "image": "ui.png",
+  "size": [
+   400,
+   214
+  ],
+  "note": "Screen-space UI at 1x — scale by an integer (2x/3x) with nearest-neighbour. panel_* are 9-sliceable with a 6px inset. font_5x7: glyph cells are 6px apart, order = the key order in this frame list; every glyph is 5x7.",
+  "fontOrder": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:./-!?+% x",
+  "frames": {
+   "panel_dialog": {
+    "x": 1,
+    "y": 1,
+    "w": 160,
+    "h": 112
+   },
+   "panel_small": {
+    "x": 162,
+    "y": 1,
+    "w": 96,
+    "h": 64
+   },
+   "panel_9slice": {
+    "x": 259,
+    "y": 1,
+    "w": 24,
+    "h": 24
+   },
+   "btn_play_normal": {
+    "x": 284,
+    "y": 1,
+    "w": 72,
+    "h": 22
+   },
+   "btn_play_hover": {
+    "x": 1,
+    "y": 114,
+    "w": 72,
+    "h": 22
+   },
+   "btn_play_pressed": {
+    "x": 74,
+    "y": 114,
+    "w": 72,
+    "h": 22
+   },
+   "btn_play_disabled": {
+    "x": 147,
+    "y": 114,
+    "w": 72,
+    "h": 22
+   },
+   "btn_restart": {
+    "x": 220,
+    "y": 114,
+    "w": 96,
+    "h": 22
+   },
+   "btn_quit": {
+    "x": 1,
+    "y": 137,
+    "w": 96,
+    "h": 22
+   },
+   "timer_plate": {
+    "x": 98,
+    "y": 137,
+    "w": 49,
+    "h": 22
+   },
+   "icon_play": {
+    "x": 148,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_pause": {
+    "x": 169,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_gear": {
+    "x": 190,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_sound_on": {
+    "x": 211,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_sound_off": {
+    "x": 232,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_music": {
+    "x": 253,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_restart": {
+    "x": 274,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_home": {
+    "x": 295,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_back": {
+    "x": 316,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_close": {
+    "x": 337,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_flag": {
+    "x": 358,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_trophy": {
+    "x": 379,
+    "y": 137,
+    "w": 20,
+    "h": 20
+   },
+   "icon_star": {
+    "x": 1,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_heart": {
+    "x": 22,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_coin": {
+    "x": 43,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_siren": {
+    "x": 64,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_speedo": {
+    "x": 85,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_map": {
+    "x": 106,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_wrench": {
+    "x": 127,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_cop": {
+    "x": 148,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_gear_pressed": {
+    "x": 169,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_play_pressed": {
+    "x": 190,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "icon_pause_pressed": {
+    "x": 211,
+    "y": 160,
+    "w": 20,
+    "h": 20
+   },
+   "badge_lap": {
+    "x": 232,
+    "y": 160,
+    "w": 67,
+    "h": 20
+   },
+   "badge_wanted": {
+    "x": 300,
+    "y": 160,
+    "w": 49,
+    "h": 20
+   },
+   "btn_small_ok": {
+    "x": 350,
+    "y": 160,
+    "w": 48,
+    "h": 18
+   },
+   "bar_empty": {
+    "x": 1,
+    "y": 181,
+    "w": 72,
+    "h": 12
+   },
+   "bar_half": {
+    "x": 74,
+    "y": 181,
+    "w": 72,
+    "h": 12
+   },
+   "bar_full": {
+    "x": 147,
+    "y": 181,
+    "w": 72,
+    "h": 12
+   },
+   "bar_damage": {
+    "x": 220,
+    "y": 181,
+    "w": 72,
+    "h": 12
+   },
+   "bar_boost": {
+    "x": 293,
+    "y": 181,
+    "w": 72,
+    "h": 12
+   },
+   "stars_0": {
+    "x": 1,
+    "y": 194,
+    "w": 37,
+    "h": 11
+   },
+   "stars_1": {
+    "x": 39,
+    "y": 194,
+    "w": 37,
+    "h": 11
+   },
+   "stars_2": {
+    "x": 77,
+    "y": 194,
+    "w": 37,
+    "h": 11
+   },
+   "stars_3": {
+    "x": 115,
+    "y": 194,
+    "w": 37,
+    "h": 11
+   },
+   "cursor": {
+    "x": 153,
+    "y": 194,
+    "w": 9,
+    "h": 11
+   },
+   "font_5x7": {
+    "x": 1,
+    "y": 206,
+    "w": 275,
+    "h": 7
+   }
+  }
+ },
+ "finish": {
+  "image": "finish.png",
+  "size": [
+   389,
+   263
+  ],
+  "note": "Finish/start line kit. tile_finish_h/v are 48px map tiles that drop straight into the road grid; banner_* hang above the road; burst_*/confetti_* play on the escape screen.",
+  "frames": {
+   "burst_01": {
+    "x": 1,
+    "y": 1,
+    "w": 96,
+    "h": 96
+   },
+   "burst_02": {
+    "x": 98,
+    "y": 1,
+    "w": 96,
+    "h": 96
+   },
+   "burst_03": {
+    "x": 195,
+    "y": 1,
+    "w": 96,
+    "h": 96
+   },
+   "burst_04": {
+    "x": 292,
+    "y": 1,
+    "w": 96,
+    "h": 96
+   },
+   "burst_05": {
+    "x": 1,
+    "y": 98,
+    "w": 96,
+    "h": 96
+   },
+   "burst_06": {
+    "x": 98,
+    "y": 98,
+    "w": 96,
+    "h": 96
+   },
+   "tile_finish_h": {
+    "x": 195,
+    "y": 98,
+    "w": 48,
+    "h": 48
+   },
+   "tile_finish_v": {
+    "x": 244,
+    "y": 98,
+    "w": 48,
+    "h": 48
+   },
+   "confetti_1": {
+    "x": 293,
+    "y": 98,
+    "w": 64,
+    "h": 40
+   },
+   "confetti_2": {
+    "x": 1,
+    "y": 195,
+    "w": 64,
+    "h": 40
+   },
+   "confetti_3": {
+    "x": 66,
+    "y": 195,
+    "w": 64,
+    "h": 40
+   },
+   "confetti_4": {
+    "x": 131,
+    "y": 195,
+    "w": 64,
+    "h": 40
+   },
+   "banner_finish": {
+    "x": 196,
+    "y": 195,
+    "w": 108,
+    "h": 26
+   },
+   "banner_start": {
+    "x": 1,
+    "y": 236,
+    "w": 108,
+    "h": 26
+   },
+   "shield_cleared": {
+    "x": 110,
+    "y": 236,
+    "w": 20,
+    "h": 22
+   },
+   "shield_wanted": {
+    "x": 131,
+    "y": 236,
+    "w": 20,
+    "h": 22
+   },
+   "start_lights_1": {
+    "x": 152,
+    "y": 236,
+    "w": 46,
+    "h": 20
+   },
+   "start_lights_2": {
+    "x": 199,
+    "y": 236,
+    "w": 46,
+    "h": 20
+   },
+   "start_lights_3": {
+    "x": 246,
+    "y": 236,
+    "w": 46,
+    "h": 20
+   },
+   "flag_wave_1": {
+    "x": 293,
+    "y": 236,
+    "w": 22,
+    "h": 18
+   },
+   "flag_wave_2": {
+    "x": 316,
+    "y": 236,
+    "w": 22,
+    "h": 18
+   },
+   "flag_wave_3": {
+    "x": 339,
+    "y": 236,
+    "w": 22,
+    "h": 18
+   },
+   "flag_wave_4": {
+    "x": 362,
+    "y": 236,
+    "w": 22,
+    "h": 18
+   }
+  }
+ },
+ "props": {
+  "image": "props.png",
+  "size": [
+   312,
+   45
+  ],
+  "note": "Small props. Everything except sign_*/traffic_light_*/streetlamp_tall/bus_stop/gas_pump/phone_booth/well is light enough to be pushed by a car — see ASSETS_GUIDE.md for suggested masses.",
+  "frames": {
+   "streetlamp_tall": {
+    "x": 1,
+    "y": 1,
+    "w": 26,
+    "h": 26
+   },
+   "gas_pump": {
+    "x": 28,
+    "y": 1,
+    "w": 16,
+    "h": 22
+   },
+   "traffic_light_red": {
+    "x": 45,
+    "y": 1,
+    "w": 14,
+    "h": 22
+   },
+   "traffic_light_amber": {
+    "x": 60,
+    "y": 1,
+    "w": 14,
+    "h": 22
+   },
+   "traffic_light_green": {
+    "x": 75,
+    "y": 1,
+    "w": 14,
+    "h": 22
+   },
+   "dumpster": {
+    "x": 90,
+    "y": 1,
+    "w": 30,
+    "h": 20
+   },
+   "picnic_table": {
+    "x": 121,
+    "y": 1,
+    "w": 26,
+    "h": 20
+   },
+   "bus_stop": {
+    "x": 148,
+    "y": 1,
+    "w": 34,
+    "h": 20
+   },
+   "shopping_cart": {
+    "x": 183,
+    "y": 1,
+    "w": 16,
+    "h": 20
+   },
+   "well": {
+    "x": 200,
+    "y": 1,
+    "w": 20,
+    "h": 20
+   },
+   "crate_metal": {
+    "x": 221,
+    "y": 1,
+    "w": 18,
+    "h": 18
+   },
+   "tire_stack": {
+    "x": 240,
+    "y": 1,
+    "w": 18,
+    "h": 18
+   },
+   "planter": {
+    "x": 259,
+    "y": 1,
+    "w": 18,
+    "h": 18
+   },
+   "phone_booth": {
+    "x": 278,
+    "y": 1,
+    "w": 16,
+    "h": 18
+   },
+   "crate": {
+    "x": 295,
+    "y": 1,
+    "w": 16,
+    "h": 16
+   },
+   "mailbox": {
+    "x": 1,
+    "y": 28,
+    "w": 12,
+    "h": 16
+   },
+   "pallet": {
+    "x": 14,
+    "y": 28,
+    "w": 22,
+    "h": 16
+   },
+   "hay_bale": {
+    "x": 37,
+    "y": 28,
+    "w": 22,
+    "h": 16
+   },
+   "sign_stop": {
+    "x": 60,
+    "y": 28,
+    "w": 14,
+    "h": 16
+   },
+   "sign_speed": {
+    "x": 75,
+    "y": 28,
+    "w": 14,
+    "h": 16
+   },
+   "oil_drum": {
+    "x": 90,
+    "y": 28,
+    "w": 14,
+    "h": 14
+   },
+   "trash_can": {
+    "x": 105,
+    "y": 28,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_red": {
+    "x": 120,
+    "y": 28,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_blue": {
+    "x": 135,
+    "y": 28,
+    "w": 14,
+    "h": 14
+   },
+   "barrel_green": {
+    "x": 150,
+    "y": 28,
+    "w": 14,
+    "h": 14
+   },
+   "sandbag": {
+    "x": 165,
+    "y": 28,
+    "w": 16,
+    "h": 12
+   },
+   "bollard": {
+    "x": 182,
+    "y": 28,
+    "w": 10,
+    "h": 10
+   }
+  }
+ },
+ "structures": {
+  "image": "structures.png",
+  "size": [
+   355,
+   224
+  ],
+  "note": "Top-down buildings, all solid colliders. Footprints are the sprite bounds minus the 2-3px contact shadow on the south/east side.",
+  "frames": {
+   "building_office_long": {
+    "x": 1,
+    "y": 1,
+    "w": 54,
+    "h": 108
+   },
+   "building_mall": {
+    "x": 56,
+    "y": 1,
+    "w": 126,
+    "h": 96
+   },
+   "building_tower_blue": {
+    "x": 183,
+    "y": 1,
+    "w": 86,
+    "h": 86
+   },
+   "building_apartment_l": {
+    "x": 270,
+    "y": 1,
+    "w": 84,
+    "h": 84
+   },
+   "building_warehouse": {
+    "x": 1,
+    "y": 110,
+    "w": 112,
+    "h": 72
+   },
+   "barn_red": {
+    "x": 114,
+    "y": 110,
+    "w": 56,
+    "h": 64
+   },
+   "house_l_terracotta": {
+    "x": 171,
+    "y": 110,
+    "w": 52,
+    "h": 52
+   },
+   "house_l_blue": {
+    "x": 224,
+    "y": 110,
+    "w": 52,
+    "h": 52
+   },
+   "townhouse_row": {
+    "x": 277,
+    "y": 110,
+    "w": 74,
+    "h": 40
+   },
+   "building_shop": {
+    "x": 1,
+    "y": 183,
+    "w": 52,
+    "h": 40
+   },
+   "house_cottage_cream": {
+    "x": 54,
+    "y": 183,
+    "w": 30,
+    "h": 34
+   },
+   "house_cottage_slate": {
+    "x": 85,
+    "y": 183,
+    "w": 30,
+    "h": 34
+   },
+   "house_ranch_brown": {
+    "x": 116,
+    "y": 183,
+    "w": 66,
+    "h": 34
+   },
+   "house_ranch_green": {
+    "x": 183,
+    "y": 183,
+    "w": 66,
+    "h": 34
+   },
+   "garage": {
+    "x": 250,
+    "y": 183,
+    "w": 34,
+    "h": 28
+   },
+   "shed": {
+    "x": 285,
+    "y": 183,
+    "w": 22,
+    "h": 20
+   }
+  }
+ },
+ "wrecks": {
+  "image": "wrecks.png",
+  "size": [
+   303,
+   115
+  ],
+  "note": "Burnt-out husk per car/police unit, same size and north facing as the live sprite — swap it in on death and keep the rotation. Loop fx/smolder_* on top.",
+  "frames": {
+   "wreck_police_riot": {
+    "x": 1,
+    "y": 1,
+    "w": 34,
+    "h": 60
+   },
+   "wreck_van_white": {
+    "x": 36,
+    "y": 1,
+    "w": 30,
+    "h": 56
+   },
+   "wreck_pickup_tan": {
+    "x": 67,
+    "y": 1,
+    "w": 30,
+    "h": 54
+   },
+   "wreck_sedan_red": {
+    "x": 98,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_sports_blue": {
+    "x": 127,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_muscle_orange": {
+    "x": 156,
+    "y": 1,
+    "w": 30,
+    "h": 52
+   },
+   "wreck_suv_silver": {
+    "x": 187,
+    "y": 1,
+    "w": 30,
+    "h": 52
+   },
+   "wreck_taxi_yellow": {
+    "x": 218,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_convertible_teal": {
+    "x": 247,
+    "y": 1,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_classic_green": {
+    "x": 276,
+    "y": 1,
+    "w": 26,
+    "h": 52
+   },
+   "wreck_coupe_purple": {
+    "x": 1,
+    "y": 62,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_roadster_black": {
+    "x": 30,
+    "y": 62,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_buggy_lime": {
+    "x": 59,
+    "y": 62,
+    "w": 30,
+    "h": 52
+   },
+   "wreck_police_regular": {
+    "x": 90,
+    "y": 62,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_police_chaser": {
+    "x": 119,
+    "y": 62,
+    "w": 28,
+    "h": 52
+   },
+   "wreck_police_blocker": {
+    "x": 148,
+    "y": 62,
+    "w": 32,
+    "h": 52
+   },
+   "wreck_hatchback_green": {
+    "x": 181,
+    "y": 62,
+    "w": 28,
+    "h": 48
+   },
+   "wreck_police_cutter": {
+    "x": 210,
+    "y": 62,
+    "w": 28,
+    "h": 48
+   },
+   "wreck_compact_pink": {
+    "x": 239,
+    "y": 62,
+    "w": 28,
+    "h": 44
    }
   }
  }
