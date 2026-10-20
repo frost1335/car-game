@@ -11,6 +11,9 @@ extends Car
 @export var bust_speed: float = 80.0       # crawl speed while busted
 @export var bust_decel: float = 500.0      # how fast we drop down to bust_speed
 
+# - Explosion Scene
+@export var explosion_scene: PackedScene
+
 # Connect to THIS, once, in your main scene. It never changes as police spawn/die.
 signal busted
 signal wrecked(at_position: Vector2)
@@ -39,6 +42,7 @@ func _post_move() -> void:
 # Called by police that hit us, AND by ourselves when we ram a stopped cruiser.
 # Guarded, so both paths firing in the same frame is harmless.
 func bust() -> void:
+	_spawn_explosion()
 	if _dead:
 		return
 	_dead = true
@@ -46,6 +50,7 @@ func bust() -> void:
 	busted.emit()
 
 func _destroy() -> void:
+	_spawn_explosion()
 	if _dead:
 		return
 	_dead = true
@@ -86,3 +91,10 @@ func _get_input() -> void:
 	
 	if Input.is_action_pressed("brake"):
 		acceleration = transform.x * braking
+
+func _spawn_explosion() -> void:
+	if explosion_scene == null:
+		return
+	var boom := explosion_scene.instantiate()
+	boom.global_position = global_position
+	get_tree().current_scene.add_child.call_deferred(boom)

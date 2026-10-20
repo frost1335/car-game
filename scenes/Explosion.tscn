@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bfuv5fhy3pbgg"]
+
+[ext_resource type="Texture2D" uid="uid://qq8ligtisq17" path="res://assets/fx/explosion/explode_01.png" id="1_qjsk2"]
+[ext_resource type="Script" uid="uid://t24cf87jt5yq" path="res://scripts/explosion.gd" id="1_to5er"]
+[ext_resource type="Texture2D" uid="uid://bxrhrf6x7lt6j" path="res://assets/fx/debris/debris_sheet.png" id="2_rh5jb"]
+[ext_resource type="Texture2D" uid="uid://hjfcgmr8ef2a" path="res://assets/fx/explosion/explode_02.png" id="2_to5er"]
+[ext_resource type="Texture2D" uid="uid://badknd37c7505" path="res://assets/fx/dust/dust_sheet.png" id="3_ifdwo"]
+[ext_resource type="Texture2D" uid="uid://cyr5s87omjrw2" path="res://assets/fx/explosion/explode_03.png" id="3_rh5jb"]
+[ext_resource type="Texture2D" uid="uid://bjcqvdwo3q1j8" path="res://assets/fx/explosion/explode_04.png" id="4_ifdwo"]
+[ext_resource type="Texture2D" uid="uid://kg1kihubscqi" path="res://assets/fx/explosion/explode_05.png" id="5_vmplm"]
+[ext_resource type="Texture2D" uid="uid://cwkkjf4wp5tf0" path="res://assets/fx/explosion/explode_06.png" id="6_8h5gn"]
+[ext_resource type="Texture2D" uid="uid://bc4ve785up7qd" path="res://assets/fx/explosion/explode_07.png" id="7_jcyuw"]
+[ext_resource type="Texture2D" uid="uid://llqxc0gi0myi" path="res://assets/fx/explosion/explode_08.png" id="8_mcxcc"]
+[ext_resource type="Texture2D" uid="uid://dkb81ois7j7pe" path="res://assets/fx/explosion/explode_09.png" id="9_xaujk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_py1uk"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rh5jb"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ikcy3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qjsk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_to5er")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rh5jb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ifdwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vmplm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8h5gn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jcyuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mcxcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xaujk")
+}],
+"loop": 0,
+"name": &"explode",
+"speed": 12.0
+}]
+
+[node name="Explosion" type="Node2D" unique_id=596612792]
+z_index = 10
+script = ExtResource("1_to5er")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1697454387]
+
+[node name="Debris" type="CPUParticles2D" parent="." unique_id=192567187]
+material = SubResource("CanvasItemMaterial_py1uk")
+emitting = false
+amount = 25
+texture = ExtResource("2_rh5jb")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+damping_min = 400.0
+damping_max = 800.0
+angle_max = 360.0
+anim_offset_max = 1.0
+
+[node name="Dust" type="CPUParticles2D" parent="." unique_id=544003209]
+material = SubResource("CanvasItemMaterial_rh5jb")
+emitting = false
+amount = 30
+texture = ExtResource("3_ifdwo")
+lifetime = 3.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 240.0
+damping_min = 200.0
+damping_max = 200.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+
+[node name="Fireball" type="AnimatedSprite2D" parent="." unique_id=273517573]
+scale = Vector2(3.1801121, 3.1801121)
+sprite_frames = SubResource("SpriteFrames_ikcy3")
+animation = &"explode"
+frame = 8
+frame_progress = 1.0
+
+[node name="Smoke" type="CPUParticles2D" parent="." unique_id=232226726]
+visible = false
+emitting = false
+
+[node name="Flash" type="Sprite2D" parent="." unique_id=1443896653]
+visible = false

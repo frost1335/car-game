@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dgpqs50mrwih5"]
 
 [ext_resource type="Script" uid="uid://cgniwo785bdmw" path="res://scripts/player_car.gd" id="1_7u4s5"]
-[ext_resource type="Texture2D" uid="uid://bogbivbjwfx70" path="res://assets/cars/buggy_lime.png" id="2_ys5ts"]
+[ext_resource type="PackedScene" uid="uid://bfuv5fhy3pbgg" path="res://scenes/Explosion.tscn" id="2_qn377"]
+[ext_resource type="Texture2D" uid="uid://bwbdr7omshmte" path="res://assets/cars/buggy_lime.png" id="2_ys5ts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
 size = Vector2(92, 40)
@@ -10,6 +11,7 @@ size = Vector2(92, 40)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_7u4s5")
+explosion_scene = ExtResource("2_qn377")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
 z_index = 5

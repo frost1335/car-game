@@ -2,18 +2,21 @@ extends Car
 
 @export var explode_impact_speed: float = 80.0
 
-# --- Arrest ---
+# - Arrest
 @export var arrest_brake: float = 350.0         # how hard we stop once the player is caught
 
-# --- Obstacle impacts ---
+# - Obstacle impacts
 @export var steer_rate := 2.0
 
-# Nearby objects list
-var nearby: Array[Node2D] = []
+# - Explosion Scene
+@export var explosion_scene: PackedScene
 
 # Emits the position because the node frees itself -- the listener needs to
 # know WHERE to spawn the explosion effect.
 signal exploded(at_position: Vector2)
+
+# Nearby objects list
+var nearby: Array[Node2D] = []
 
 var target: Node2D = null
 var chasing: bool = true
@@ -105,6 +108,7 @@ func _resolve_contacts() -> void:
 		if other.is_in_group("player"):
 			# The player owns the bust state; it guards against double-firing.
 			if other.has_method("bust"):
+				_spawn_explosion()
 				other.bust()
 
 		elif other.is_in_group("police"):
@@ -125,11 +129,19 @@ func _closing_speed(c: KinematicCollision2D, other: Object) -> float:
 	return absf((velocity - other_vel).dot(c.get_normal()))
 
 func _destroy() -> void:
+	_spawn_explosion()
 	if _dead:      # idempotent -- safe to call from the other car
 		return
 	_dead = true
 	exploded.emit(global_position)
 	queue_free()
+
+func _spawn_explosion() -> void:
+	if explosion_scene == null:
+		return
+	var boom := explosion_scene.instantiate()
+	boom.global_position = global_position
+	get_tree().current_scene.add_child.call_deferred(boom)
 
 func _on_area_2d_body_entered(obj: Node2D) -> void:
 	nearby.append(obj)
