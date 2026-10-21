@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var fireball: AnimatedSprite2D = $Fireball
+@onready var explosion_animation: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	fireball.play("explode")              # match your animation name
-	fireball.animation_finished.connect(queue_free)
+	explosion_animation.play("boom")              # match your animation name
+	explosion_animation.animation_finished.connect(queue_free)

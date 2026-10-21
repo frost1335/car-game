@@ -53,6 +53,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flash:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8.142857, 2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flash:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fireball:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
 
 [sub_resource type="Animation" id="Animation_xaujk"]
 resource_name = "boom"
@@ -82,7 +118,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Flash2")
+tracks/2/path = NodePath("Flash")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -97,7 +133,7 @@ tracks/3/path = NodePath("Debris:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.26666668),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -109,7 +145,7 @@ tracks/4/path = NodePath("Dust:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.16666667),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -132,21 +168,60 @@ tracks/6/path = NodePath("Smoke:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.099999994, 3.1333334),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
 }
-tracks/7/type = "method"
+tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Fireball")
+tracks/7/path = NodePath("Flash:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2.036, 0.5), Vector2(8.142857, 2)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Flash:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Fireball:animation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Fireball")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"explode", 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dq134"]
@@ -202,6 +277,16 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oo8e4"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_8h5gn"]
+offsets = PackedFloat32Array(0.013623978, 1)
+colors = PackedColorArray(0, 0, 0, 0.7490196, 1, 1, 1, 0.83137256)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3unlm"]
 blend_mode = 1
 
@@ -217,7 +302,7 @@ material = SubResource("CanvasItemMaterial_py1uk")
 emitting = false
 amount = 25
 texture = ExtResource("2_rh5jb")
-lifetime = 5.0
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 emission_shape = 1
@@ -235,51 +320,55 @@ anim_offset_max = 1.0
 
 [node name="Dust" type="CPUParticles2D" parent="." unique_id=544003209]
 material = SubResource("CanvasItemMaterial_rh5jb")
+scale = Vector2(1.0095644, 1)
 emitting = false
 amount = 30
 texture = ExtResource("3_ifdwo")
-lifetime = 3.5
+lifetime = 1.2
 one_shot = true
 explosiveness = 1.0
 emission_shape = 1
 emission_sphere_radius = 20.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 120.0
+initial_velocity_min = 200.0
 initial_velocity_max = 240.0
 damping_min = 200.0
 damping_max = 200.0
 scale_amount_min = 4.0
 scale_amount_max = 8.0
+anim_offset_max = 1.0
 
 [node name="Fireball" type="AnimatedSprite2D" parent="." unique_id=273517573]
 scale = Vector2(3.1801121, 3.1801121)
 sprite_frames = SubResource("SpriteFrames_ikcy3")
 animation = &"explode"
 frame = 8
-frame_progress = 1.0
 
 [node name="Smoke" type="CPUParticles2D" parent="." unique_id=232226726]
 modulate = Color(0.99607843, 1, 1, 0.34117648)
+material = SubResource("CanvasItemMaterial_oo8e4")
 emitting = false
-amount = 16
+amount = 24
 texture = ExtResource("13_8h5gn")
-lifetime = 2.0
+lifetime = 4.0
 one_shot = true
-speed_scale = 0.3
 explosiveness = 0.9
 emission_shape = 1
 emission_sphere_radius = 40.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 180.0
-initial_velocity_max = 280.0
+initial_velocity_min = 240.0
+initial_velocity_max = 340.0
 damping_min = 300.0
-damping_max = 500.0
+damping_max = 600.0
 scale_amount_min = 6.0
 scale_amount_max = 10.0
+color = Color(1, 1, 1, 0.78431374)
+color_ramp = SubResource("Gradient_8h5gn")
+anim_offset_max = 1.0
 
-[node name="Flash2" type="Sprite2D" parent="." unique_id=849449123]
+[node name="Flash" type="Sprite2D" parent="." unique_id=849449123]
 material = SubResource("CanvasItemMaterial_3unlm")
 scale = Vector2(8.142857, 2)
 texture = ExtResource("14_jcyuw")
