@@ -3,21 +3,31 @@
 [ext_resource type="Script" uid="uid://cgniwo785bdmw" path="res://scripts/player_car.gd" id="1_7u4s5"]
 [ext_resource type="PackedScene" uid="uid://bfuv5fhy3pbgg" path="res://scenes/Explosion.tscn" id="2_qn377"]
 [ext_resource type="Texture2D" uid="uid://bwbdr7omshmte" path="res://assets/cars/buggy_lime.png" id="2_ys5ts"]
+[ext_resource type="Texture2D" uid="uid://bplv47aadjhwa" path="res://assets/fx/wrecks/wreck_buggy_lime.png" id="3_vaoqk"]
+[ext_resource type="Script" uid="uid://csjs2a21dn32y" path="res://scripts/camera_2d.gd" id="4_fbyd5"]
+[ext_resource type="Texture2D" uid="uid://derlihuy40c71" path="res://assets/fx/smoke/smolders_sheet.png" id="5_t6kce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
 size = Vector2(92, 40)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3unlm"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [node name="Car" type="CharacterBody2D" unique_id=1911748893]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_7u4s5")
 explosion_scene = ExtResource("2_qn377")
+wreck_texture = ExtResource("3_vaoqk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=691586055]
 z_index = 5
 shape = SubResource("RectangleShape2D_3unlm")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=884641444]
+[node name="Body" type="Sprite2D" parent="Collision" unique_id=884641444]
 position = Vector2(0, -1.1444092e-05)
 rotation = 1.5707964
 scale = Vector2(2.4214091, 2.5302548)
@@ -25,3 +35,23 @@ texture = ExtResource("2_ys5ts")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=151300935]
 zoom = Vector2(0.5, 0.5)
+script = ExtResource("4_fbyd5")
+
+[node name="WreckSmoke" type="CPUParticles2D" parent="." unique_id=721209250]
+z_index = 10
+material = SubResource("CanvasItemMaterial_3unlm")
+position = Vector2(0, -36)
+emitting = false
+amount = 12
+texture = ExtResource("5_t6kce")
+lifetime = 3.0
+emission_shape = 1
+emission_sphere_radius = 60.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color = Color(1, 1, 1, 0.627451)
+anim_offset_max = 1.0

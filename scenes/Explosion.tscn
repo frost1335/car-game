@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://llqxc0gi0myi" path="res://assets/fx/explosion/explode_08.png" id="8_mcxcc"]
 [ext_resource type="Texture2D" uid="uid://dkb81ois7j7pe" path="res://assets/fx/explosion/explode_09.png" id="9_xaujk"]
 [ext_resource type="Texture2D" uid="uid://bc3njhyrouxqw" path="res://assets/fx/smoke/tiresmoke_02.png" id="13_8h5gn"]
-[ext_resource type="Texture2D" uid="uid://bq1ihy2jnjmey" path="res://assets/cars/van_white.png" id="14_jcyuw"]
 
 [sub_resource type="Animation" id="Animation_mcxcc"]
 length = 0.001
@@ -80,14 +79,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Fireball:animation")
+tracks/5/path = NodePath("Smoke:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"explode"]
+"update": 0,
+"values": [Color(0.99607843, 1, 1, 0.34117648)]
 }
 
 [sub_resource type="Animation" id="Animation_xaujk"]
@@ -183,7 +182,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2.036, 0.5), Vector2(8.142857, 2)]
+"values": [Vector2(0.5, 0.5), Vector2(2.5, 2.5)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -192,36 +191,50 @@ tracks/8/path = NodePath("Flash:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 5.0982413),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/9/type = "value"
+tracks/9/type = "method"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Fireball:animation")
+tracks/9/path = NodePath("Fireball")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"explode"]
+"values": [{
+"args": [&"explode", 1.0, false],
+"method": &"play"
+}]
 }
 tracks/10/type = "method"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Fireball")
+tracks/10/path = NodePath(".")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"explode", 1.0, false],
-"method": &"play"
+"args": [],
+"method": &"_shake"
 }]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Smoke:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.5, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.99607843, 1, 1, 0.5411765), Color(0.99607843, 1, 1, 0.05882353)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dq134"]
@@ -287,8 +300,15 @@ particles_anim_loop = false
 offsets = PackedFloat32Array(0.013623978, 1)
 colors = PackedColorArray(0, 0, 0, 0.7490196, 1, 1, 1, 0.83137256)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3unlm"]
-blend_mode = 1
+[sub_resource type="Gradient" id="Gradient_vmplm"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5mx7f"]
+gradient = SubResource("Gradient_vmplm")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [node name="Explosion" type="Node2D" unique_id=596612792]
 z_index = 10
@@ -298,6 +318,7 @@ script = ExtResource("1_to5er")
 libraries/ = SubResource("AnimationLibrary_dq134")
 
 [node name="Debris" type="CPUParticles2D" parent="." unique_id=192567187]
+z_index = 10
 material = SubResource("CanvasItemMaterial_py1uk")
 emitting = false
 amount = 25
@@ -319,6 +340,7 @@ angle_max = 360.0
 anim_offset_max = 1.0
 
 [node name="Dust" type="CPUParticles2D" parent="." unique_id=544003209]
+z_index = 10
 material = SubResource("CanvasItemMaterial_rh5jb")
 scale = Vector2(1.0095644, 1)
 emitting = false
@@ -340,13 +362,16 @@ scale_amount_max = 8.0
 anim_offset_max = 1.0
 
 [node name="Fireball" type="AnimatedSprite2D" parent="." unique_id=273517573]
+z_index = 10
 scale = Vector2(3.1801121, 3.1801121)
 sprite_frames = SubResource("SpriteFrames_ikcy3")
 animation = &"explode"
 frame = 8
+frame_progress = 1.0
 
 [node name="Smoke" type="CPUParticles2D" parent="." unique_id=232226726]
 modulate = Color(0.99607843, 1, 1, 0.34117648)
+z_index = 10
 material = SubResource("CanvasItemMaterial_oo8e4")
 emitting = false
 amount = 24
@@ -369,8 +394,6 @@ color_ramp = SubResource("Gradient_8h5gn")
 anim_offset_max = 1.0
 
 [node name="Flash" type="Sprite2D" parent="." unique_id=849449123]
-material = SubResource("CanvasItemMaterial_3unlm")
+z_index = 10
 scale = Vector2(8.142857, 2)
-texture = ExtResource("14_jcyuw")
-region_enabled = true
-region_rect = Rect2(8.038258, 17.21813, 14.061684, 24.362684)
+texture = SubResource("GradientTexture2D_5mx7f")

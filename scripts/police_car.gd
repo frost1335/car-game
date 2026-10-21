@@ -108,7 +108,8 @@ func _resolve_contacts() -> void:
 		if other.is_in_group("player"):
 			# The player owns the bust state; it guards against double-firing.
 			if other.has_method("bust"):
-				_spawn_explosion()
+				# When the player is caught the police car destroyed during the process
+				_destroy()
 				other.bust()
 
 		elif other.is_in_group("police"):

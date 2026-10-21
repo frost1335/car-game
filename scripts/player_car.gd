@@ -14,6 +14,9 @@ extends Car
 # - Explosion Scene
 @export var explosion_scene: PackedScene
 
+# - Wreck Texture
+@export var wreck_texture: Texture2D
+
 # Connect to THIS, once, in your main scene. It never changes as police spawn/die.
 signal busted
 signal wrecked(at_position: Vector2)
@@ -43,6 +46,7 @@ func _post_move() -> void:
 # Guarded, so both paths firing in the same frame is harmless.
 func bust() -> void:
 	_spawn_explosion()
+	_become_wreck()
 	if _dead:
 		return
 	_dead = true
@@ -51,6 +55,7 @@ func bust() -> void:
 
 func _destroy() -> void:
 	_spawn_explosion()
+	_become_wreck()
 	if _dead:
 		return
 	_dead = true
@@ -98,3 +103,9 @@ func _spawn_explosion() -> void:
 	var boom := explosion_scene.instantiate()
 	boom.global_position = global_position
 	get_tree().current_scene.add_child.call_deferred(boom)
+
+func _become_wreck() -> void:
+	if wreck_texture:
+		$Collision/Body.texture = wreck_texture
+	if has_node("WreckSmoke"):
+		$WreckSmoke.emitting = true
