@@ -22,6 +22,7 @@ signal busted
 signal wrecked(at_position: Vector2)
 
 var _bust_timer: float = 0.0
+var _roll_distance: float = 0.0
 
 func _drive(delta: float) -> void:
 	if _dead:
@@ -106,6 +107,20 @@ func _spawn_explosion() -> void:
 
 func _become_wreck() -> void:
 	if wreck_texture:
-		$Collision/Body.texture = wreck_texture
+		$Visuals/Body.texture = wreck_texture
 	if has_node("WreckSmoke"):
-		$WreckSmoke.emitting = true
+		$Visuals/WreckSmoke.emitting = true
+
+func _update_visuals(delta: float) -> void:
+	$Visuals/WheelFL.rotation = steer_direction
+	$Visuals/WheelFR.rotation = steer_direction
+
+	
+	var forward_speed := velocity.dot(transform.x)      # signed: negative when reversing
+	_roll_distance += forward_speed * delta
+	var frame_index := int(_roll_distance / 32) % 4
+	
+	$Visuals/WheelFL.frame = frame_index
+	$Visuals/WheelFR.frame = frame_index
+	$Visuals/WheelRL.frame = frame_index
+	$Visuals/WheelRR.frame = frame_index

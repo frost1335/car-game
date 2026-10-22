@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bplv47aadjhwa" path="res://assets/fx/wrecks/wreck_buggy_lime.png" id="3_vaoqk"]
 [ext_resource type="Script" uid="uid://csjs2a21dn32y" path="res://scripts/camera_2d.gd" id="4_fbyd5"]
 [ext_resource type="Texture2D" uid="uid://derlihuy40c71" path="res://assets/fx/smoke/smolders_sheet.png" id="5_t6kce"]
+[ext_resource type="Texture2D" uid="uid://cavxq8rol6ace" path="res://assets/fx/wheels/wheel_spin_sheet.png" id="5_v7lie"]
+[ext_resource type="Script" uid="uid://d3l2qcuq6wl3w" path="res://scripts/trail_left.gd" id="7_bfku0"]
+[ext_resource type="Script" uid="uid://brcrg3uktjgc8" path="res://scripts/trail_right.gd" id="8_i5sjj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
 size = Vector2(92, 40)
@@ -23,24 +26,60 @@ script = ExtResource("1_7u4s5")
 explosion_scene = ExtResource("2_qn377")
 wreck_texture = ExtResource("3_vaoqk")
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=691586055]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
 z_index = 5
 shape = SubResource("RectangleShape2D_3unlm")
 
-[node name="Body" type="Sprite2D" parent="Collision" unique_id=884641444]
+[node name="Visuals" type="Node2D" parent="." unique_id=172067820]
+
+[node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=834244114]
+modulate = Color(0.7666196, 0.76661956, 0.76661944, 0.3529412)
+rotation = 1.5707964
+scale = Vector2(2.42, 2.42)
+texture = ExtResource("2_ys5ts")
+offset = Vector2(1, 1)
+region_enabled = true
+region_rect = Rect2(4.9112134, 0, 21.142195, 52)
+
+[node name="WheelFL" type="Sprite2D" parent="Visuals" unique_id=1636427359]
+position = Vector2(33, -29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelFR" type="Sprite2D" parent="Visuals" unique_id=566666448]
+position = Vector2(33, 29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelRL" type="Sprite2D" parent="Visuals" unique_id=55576250]
+z_index = 10
+position = Vector2(-33, -29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelRR" type="Sprite2D" parent="Visuals" unique_id=942251358]
+z_index = 10
+position = Vector2(-33, 29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="Body" type="Sprite2D" parent="Visuals" unique_id=884641444]
 position = Vector2(0, -1.1444092e-05)
 rotation = 1.5707964
-scale = Vector2(2.4214091, 2.5302548)
+scale = Vector2(2.42, 2.42)
 texture = ExtResource("2_ys5ts")
+region_enabled = true
+region_rect = Rect2(4.9051404, 0, 21.21906, 52)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=151300935]
-zoom = Vector2(0.5, 0.5)
-script = ExtResource("4_fbyd5")
-
-[node name="WreckSmoke" type="CPUParticles2D" parent="." unique_id=721209250]
+[node name="WreckSmoke" type="CPUParticles2D" parent="Visuals" unique_id=721209250]
 z_index = 10
 material = SubResource("CanvasItemMaterial_3unlm")
-position = Vector2(0, -36)
+position = Vector2(1.1368684e-13, -36.000004)
+scale = Vector2(1.0000001, 1.0000001)
 emitting = false
 amount = 12
 texture = ExtResource("5_t6kce")
@@ -55,3 +94,19 @@ scale_amount_min = 4.0
 scale_amount_max = 6.0
 color = Color(1, 1, 1, 0.627451)
 anim_offset_max = 1.0
+
+[node name="TrailLeft" type="Line2D" parent="." unique_id=594707338]
+top_level = true
+z_index = 5
+default_color = Color(0.1254902, 0.1254902, 0.1254902, 0.5882353)
+script = ExtResource("7_bfku0")
+
+[node name="TrailRight" type="Line2D" parent="." unique_id=1488068992]
+top_level = true
+z_index = 5
+default_color = Color(0.1254902, 0.1254902, 0.1254902, 0.5882353)
+script = ExtResource("8_i5sjj")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=151300935]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("4_fbyd5")

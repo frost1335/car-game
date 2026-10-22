@@ -24,7 +24,7 @@ class_name Car
 @export var handbrake_traction: float = 0.04
 
 # - Obstacle impacts -
-@export var min_impact_speed: float = 100.0   	# below this, no penalty (lets you nudge walls)
+@export var min_impact_speed: float = 50.0   	# below this, no penalty (lets you nudge walls)
 @export var impact_speed_loss: float = 0.6    	# fraction of speed scrubbed on a full head-on hit
 @export var push_scale: float = 0.8           	# impulse applied to RigidBody2D props
 @export var wreck_impact_speed: float = 250.0   # at or above this -> destroyed
@@ -54,6 +54,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_post_move()
+	
+	_update_visuals(delta)
 
 	if not _dead:
 		_handle_obstacle_impacts(pre_move_velocity)
@@ -135,4 +137,7 @@ func _post_move() -> void:
 	pass
 
 func _destroy() -> void:
+	pass
+
+func _update_visuals(_delta: float) -> void:
 	pass
