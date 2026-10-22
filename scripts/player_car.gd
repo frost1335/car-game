@@ -108,7 +108,7 @@ func _spawn_explosion() -> void:
 func _become_wreck() -> void:
 	if wreck_texture:
 		$Visuals/Body.texture = wreck_texture
-	if has_node("WreckSmoke"):
+	if has_node("Visuals/WreckSmoke"):
 		$Visuals/WreckSmoke.emitting = true
 
 func _update_visuals(delta: float) -> void:

@@ -76,7 +76,7 @@ region_enabled = true
 region_rect = Rect2(4.9051404, 0, 21.21906, 52)
 
 [node name="WreckSmoke" type="CPUParticles2D" parent="Visuals" unique_id=721209250]
-z_index = 10
+z_index = 11
 material = SubResource("CanvasItemMaterial_3unlm")
 position = Vector2(1.1368684e-13, -36.000004)
 scale = Vector2(1.0000001, 1.0000001)
@@ -97,13 +97,13 @@ anim_offset_max = 1.0
 
 [node name="TrailLeft" type="Line2D" parent="." unique_id=594707338]
 top_level = true
-z_index = 5
+z_index = 1
 default_color = Color(0.1254902, 0.1254902, 0.1254902, 0.5882353)
 script = ExtResource("7_bfku0")
 
 [node name="TrailRight" type="Line2D" parent="." unique_id=1488068992]
 top_level = true
-z_index = 5
+z_index = 1
 default_color = Color(0.1254902, 0.1254902, 0.1254902, 0.5882353)
 script = ExtResource("8_i5sjj")
 

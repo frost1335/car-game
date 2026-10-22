@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dgpqs50mrwih5" path="res://scenes/Car.tscn" id="1_s0nni"]
 [ext_resource type="Script" uid="uid://dnwi7tospm47n" path="res://scripts/police_spawner.gd" id="2_aug50"]
 [ext_resource type="PackedScene" uid="uid://bl0gm6e0e6xxk" path="res://scenes/GameOver.tscn" id="3_kiw3p"]
-[ext_resource type="Texture2D" uid="uid://da6eijrionjr4" path="res://assets/tiles/grass/grass_ground_a.png" id="4_400sg"]
+[ext_resource type="Texture2D" uid="uid://crddc2advf3nm" path="res://assets/tiles/grass/grass_ground_a.png" id="4_400sg"]
 [ext_resource type="PackedScene" uid="uid://df5675e0u8mpu" path="res://scenes/House.tscn" id="5_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://ctfenmoatfkgj" path="res://scenes/Cone.tscn" id="7_kiw3p"]
 

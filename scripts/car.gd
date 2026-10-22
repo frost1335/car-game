@@ -24,11 +24,11 @@ class_name Car
 @export var handbrake_traction: float = 0.04
 
 # - Obstacle impacts -
-@export var min_impact_speed: float = 50.0   	# below this, no penalty (lets you nudge walls)
-@export var impact_speed_loss: float = 0.6    	# fraction of speed scrubbed on a full head-on hit
-@export var push_scale: float = 0.8           	# impulse applied to RigidBody2D props
-@export var wreck_impact_speed: float = 250.0   # at or above this -> destroyed
-@export var car_mass: float = 40.0    			# much heavier than a cone
+@export var min_impact_speed: float = 100.0      # below this, no penalty (lets you nudge walls)
+@export var impact_speed_loss: float = 0.6      # fraction of speed scrubbed on a full head-on hit
+@export var push_scale: float = 0.8             # impulse applied to RigidBody2D props
+@export var wreck_impact_speed: float = 150.0   # at or above this -> destroyed
+@export var car_mass: float = 40.0              # much heavier than a cone
 
 var steer_direction: float = 0.0
 var acceleration: Vector2 = Vector2.ZERO

@@ -13,5 +13,6 @@ metadata/radius = 105.0
 shape = SubResource("RectangleShape2D_qtlar")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=881685416]
+z_index = 10
 scale = Vector2(4.380953, 4.148148)
 texture = ExtResource("1_d7po0")
