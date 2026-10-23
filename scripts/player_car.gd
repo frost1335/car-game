@@ -46,19 +46,19 @@ func _post_move() -> void:
 # Called by police that hit us, AND by ourselves when we ram a stopped cruiser.
 # Guarded, so both paths firing in the same frame is harmless.
 func bust() -> void:
-	_spawn_explosion()
-	_become_wreck()
 	if _dead:
 		return
+	_become_wreck()
+	_spawn_explosion()
 	_dead = true
 	_bust_timer = bust_roll_time
 	busted.emit()
 
 func _destroy() -> void:
-	_spawn_explosion()
-	_become_wreck()
 	if _dead:
 		return
+	_become_wreck()
+	_spawn_explosion()
 	_dead = true
 	_bust_timer = 0.0          # zero timer = instant freeze, no roll-out
 	velocity = Vector2.ZERO
@@ -114,13 +114,29 @@ func _become_wreck() -> void:
 func _update_visuals(delta: float) -> void:
 	$Visuals/WheelFL.rotation = steer_direction
 	$Visuals/WheelFR.rotation = steer_direction
-
 	
 	var forward_speed := velocity.dot(transform.x)      # signed: negative when reversing
 	_roll_distance += forward_speed * delta
-	var frame_index := int(_roll_distance / 32) % 4
+	var frame_index := posmod(int(_roll_distance / 32), 4)
 	
 	$Visuals/WheelFL.frame = frame_index
 	$Visuals/WheelFR.frame = frame_index
 	$Visuals/WheelRL.frame = frame_index
 	$Visuals/WheelRR.frame = frame_index
+	
+	var slip := absf(velocity.dot(transform.y))
+	
+	if handbraking and slip > 120:
+		if trail_left and trail_right:
+			if trail_left.has_method("add_world_point") and trail_right.has_method("add_world_point"):
+				trail_left.add_world_point($Visuals/WheelRL.global_position)
+				trail_right.add_world_point($Visuals/WheelRR.global_position)
+		else:
+			trail_left = trail.instantiate()
+			trail_right = trail.instantiate()
+			
+			get_tree().current_scene.add_child.call_deferred(trail_left)
+			get_tree().current_scene.add_child.call_deferred(trail_right)
+	else:
+		trail_left = null
+		trail_right = null

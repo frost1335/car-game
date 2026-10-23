@@ -130,9 +130,9 @@ func _closing_speed(c: KinematicCollision2D, other: Object) -> float:
 	return absf((velocity - other_vel).dot(c.get_normal()))
 
 func _destroy() -> void:
-	_spawn_explosion()
 	if _dead:      # idempotent -- safe to call from the other car
 		return
+	_spawn_explosion()
 	_dead = true
 	exploded.emit(global_position)
 	queue_free()

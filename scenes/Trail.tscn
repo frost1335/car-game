@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bbvu5s4e0r3t1"]
+
+[ext_resource type="Script" uid="uid://dmd3qg0e6gsj" path="res://scripts/trail.gd" id="1_assad"]
+
+[sub_resource type="Curve" id="Curve_assad"]
+_data = [Vector2(0, 0.49627787), 0.0, 0.0, 0, 0, Vector2(0.15765765, 0.7022332), 1.9968979, 1.9968979, 0, 0, Vector2(0.49774775, 1), 0.0, 0.0, 0, 0, Vector2(0.8536036, 0.70471466), -2.0657582, -2.0657582, 0, 0, Vector2(1, 0.5062035), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_assad"]
+offsets = PackedFloat32Array(0, 0.3387978, 0.704918, 1)
+colors = PackedColorArray(0.15294118, 0.15294118, 0.15294118, 0.078431375, 0.15294118, 0.15294118, 0.15294118, 0.5882353, 0.15294118, 0.15294118, 0.15294118, 0.5882353, 0.15294118, 0.15294118, 0.15294118, 0.078431375)
+
+[node name="Trail" type="Line2D" unique_id=1031847807]
+top_level = true
+width_curve = SubResource("Curve_assad")
+default_color = Color(0.15294118, 0.15294118, 0.15294118, 0.5882353)
+gradient = SubResource("Gradient_assad")
+script = ExtResource("1_assad")

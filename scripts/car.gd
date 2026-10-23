@@ -30,11 +30,22 @@ class_name Car
 @export var wreck_impact_speed: float = 150.0   # at or above this -> destroyed
 @export var car_mass: float = 40.0              # much heavier than a cone
 
+# - Trail Scenes
+@export var trail: PackedScene
+
 var steer_direction: float = 0.0
 var acceleration: Vector2 = Vector2.ZERO
 var handbraking: bool = false
+var trail_left: Line2D
+var trail_right: Line2D
 
 var _dead: bool = false
+
+func _ready() -> void:
+	trail_left = trail.instantiate()
+	trail_right = trail.instantiate()
+	get_tree().current_scene.add_child.call_deferred(trail_left)
+	get_tree().current_scene.add_child.call_deferred(trail_right)
 
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
@@ -55,9 +66,9 @@ func _physics_process(delta: float) -> void:
 
 	_post_move()
 	
-	_update_visuals(delta)
 
 	if not _dead:
+		_update_visuals(delta)
 		_handle_obstacle_impacts(pre_move_velocity)
 
 func _apply_resistance(delta: float) -> void:
