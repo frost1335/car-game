@@ -38,6 +38,8 @@ var acceleration: Vector2 = Vector2.ZERO
 var handbraking: bool = false
 var trail_left: Line2D
 var trail_right: Line2D
+var _roll_distance: float = 0.0
+var slip: float
 
 var _dead: bool = false
 
@@ -150,5 +152,40 @@ func _post_move() -> void:
 func _destroy() -> void:
 	pass
 
-func _update_visuals(_delta: float) -> void:
-	pass
+func _update_visuals(delta: float) -> void:
+	$Visuals/WheelFL.rotation = steer_direction
+	$Visuals/WheelFR.rotation = steer_direction
+	
+	var forward_speed := velocity.dot(transform.x)      # signed: negative when reversing
+	_roll_distance += forward_speed * delta
+	var frame_index := posmod(int(_roll_distance / 32), 4)
+	
+	slip = absf(velocity.dot(transform.y))
+	
+	$Visuals/Body.position.y = velocity.dot(transform.y) * 1.3 * delta
+	$Visuals/Shadow.position.y = velocity.dot(transform.y) * 1.2 * delta
+	
+	$Visuals/WheelFL.frame = frame_index
+	$Visuals/WheelFR.frame = frame_index
+	$Visuals/WheelRL.frame = frame_index
+	$Visuals/WheelRR.frame = frame_index
+	
+	if handbraking and slip > 120:
+		if trail_left and trail_right:
+			if trail_left.has_method("add_world_point") and trail_right.has_method("add_world_point"):
+				trail_left.add_world_point($Visuals/WheelRL.global_position)
+				trail_right.add_world_point($Visuals/WheelRR.global_position)
+		else:
+			trail_left = trail.instantiate()
+			trail_right = trail.instantiate()
+
+			get_tree().current_scene.add_child.call_deferred(trail_left)
+			get_tree().current_scene.add_child.call_deferred(trail_right)
+	else:
+		if trail_left and trail_right:
+			if trail_left.has_method("detach") and trail_right.has_method("detach"):
+				trail_left.detach()
+				trail_right.detach()
+
+		trail_left = null
+		trail_right = null

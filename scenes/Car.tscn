@@ -22,8 +22,30 @@ particles_anim_loop = false
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_7u4s5")
+braking = null
+handbrake_steering_mult = null
+bust_roll_time = null
+bust_speed = null
+bust_decel = null
 explosion_scene = ExtResource("2_qn377")
 wreck_texture = ExtResource("3_vaoqk")
+engine_power = null
+max_speed = null
+max_reverse_speed = null
+steering_angle = null
+wheel_base = null
+traction_slow = null
+traction_fast = null
+traction_speed_threshold = null
+friction = null
+drag = null
+handbrake_friction = null
+handbrake_traction = null
+min_impact_speed = null
+impact_speed_loss = null
+push_scale = null
+wreck_impact_speed = null
+car_mass = null
 trail = ExtResource("3_bfku0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
@@ -68,7 +90,6 @@ flip_h = true
 vframes = 4
 
 [node name="Body" type="Sprite2D" parent="Visuals" unique_id=884641444]
-position = Vector2(0, -1.1444092e-05)
 rotation = 1.5707964
 scale = Vector2(2.42, 2.42)
 texture = ExtResource("2_ys5ts")

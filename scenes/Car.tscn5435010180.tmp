@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://dgpqs50mrwih5"]
+
+[ext_resource type="Script" uid="uid://cgniwo785bdmw" path="res://scripts/player_car.gd" id="1_7u4s5"]
+[ext_resource type="PackedScene" uid="uid://bfuv5fhy3pbgg" path="res://scenes/Explosion.tscn" id="2_qn377"]
+[ext_resource type="Texture2D" uid="uid://bwbdr7omshmte" path="res://assets/cars/buggy_lime.png" id="2_ys5ts"]
+[ext_resource type="PackedScene" uid="uid://bbvu5s4e0r3t1" path="res://scenes/Trail.tscn" id="3_bfku0"]
+[ext_resource type="Texture2D" uid="uid://bplv47aadjhwa" path="res://assets/fx/wrecks/wreck_buggy_lime.png" id="3_vaoqk"]
+[ext_resource type="Script" uid="uid://csjs2a21dn32y" path="res://scripts/camera_2d.gd" id="4_fbyd5"]
+[ext_resource type="Texture2D" uid="uid://derlihuy40c71" path="res://assets/fx/smoke/smolders_sheet.png" id="5_t6kce"]
+[ext_resource type="Texture2D" uid="uid://cavxq8rol6ace" path="res://assets/fx/wheels/wheel_spin_sheet.png" id="5_v7lie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
+size = Vector2(92, 40)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3unlm"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Car" type="CharacterBody2D" unique_id=1911748893]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_7u4s5")
+explosion_scene = ExtResource("2_qn377")
+wreck_texture = ExtResource("3_vaoqk")
+trail = ExtResource("3_bfku0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691586055]
+z_index = 5
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=172067820]
+
+[node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=834244114]
+modulate = Color(0.7666196, 0.76661956, 0.76661944, 0.3529412)
+rotation = 1.5707964
+scale = Vector2(2.42, 2.42)
+texture = ExtResource("2_ys5ts")
+offset = Vector2(1, 1)
+region_enabled = true
+region_rect = Rect2(4.9112134, 0, 21.142195, 52)
+
+[node name="WheelFL" type="Sprite2D" parent="Visuals" unique_id=1636427359]
+position = Vector2(33, -29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelFR" type="Sprite2D" parent="Visuals" unique_id=566666448]
+position = Vector2(33, 29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelRL" type="Sprite2D" parent="Visuals" unique_id=55576250]
+z_index = 10
+position = Vector2(-33, -29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="WheelRR" type="Sprite2D" parent="Visuals" unique_id=942251358]
+z_index = 10
+position = Vector2(-33, 29)
+texture = ExtResource("5_v7lie")
+flip_h = true
+vframes = 4
+
+[node name="Body" type="Sprite2D" parent="Visuals" unique_id=884641444]
+rotation = 1.5707964
+scale = Vector2(2.42, 2.42)
+texture = ExtResource("2_ys5ts")
+region_enabled = true
+region_rect = Rect2(4.9051404, 0, 21.21906, 52)
+
+[node name="WreckSmoke" type="CPUParticles2D" parent="Visuals" unique_id=721209250]
+z_index = 11
+material = SubResource("CanvasItemMaterial_3unlm")
+position = Vector2(1.1368684e-13, -36.000004)
+scale = Vector2(1.0000001, 1.0000001)
+emitting = false
+amount = 12
+texture = ExtResource("5_t6kce")
+lifetime = 3.0
+emission_shape = 1
+emission_sphere_radius = 60.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color = Color(1, 1, 1, 0.627451)
+anim_offset_max = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=151300935]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("4_fbyd5")
