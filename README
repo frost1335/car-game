@@ -2,8 +2,8 @@
 ## Command to combine animation frames
 
 # 1. Get the max width and max height and save them into variables
-MAX_W=$(magick debris_*.png -format "%w\n" info: | sort -nr | head -n1)
-MAX_H=$(magick debris_*.png -format "%h\n" info: | sort -nr | head -n1)
+MAX_W=$(magick strobe_*.png -format "%w\n" info: | sort -nr | head -n1)
+MAX_H=$(magick strobe_*.png -format "%h\n" info: | sort -nr | head -n1)
 
 # 2. Use those variables to flawlessly fit and pad everything into a perfect grid
-magick debris_*.png -background none -gravity center -extent "${MAX_W}x${MAX_H}" miff:- | magick montage miff:- -tile 4x1 -geometry +0+0 -background none debris_sheet.png
+magick strobe_*.png -background none -gravity center -extent "${MAX_W}x${MAX_H}" miff:- | magick montage miff:- -tile 4x1 -geometry +0+0 -background none strobe_sheet.png

@@ -134,9 +134,14 @@ func _update_visuals(delta: float) -> void:
 		else:
 			trail_left = trail.instantiate()
 			trail_right = trail.instantiate()
-			
+
 			get_tree().current_scene.add_child.call_deferred(trail_left)
 			get_tree().current_scene.add_child.call_deferred(trail_right)
 	else:
+		if trail_left and trail_right:
+			if trail_left.has_method("detach") and trail_right.has_method("detach"):
+				trail_left.detach()
+				trail_right.detach()
+
 		trail_left = null
 		trail_right = null
