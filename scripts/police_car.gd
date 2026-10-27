@@ -65,6 +65,7 @@ func _chase(delta) -> void:
 	acceleration = transform.x * engine_power
 	
 	for object in nearby:
+		if object == target: continue
 		if not is_instance_valid(object):
 			continue
 		
@@ -111,6 +112,7 @@ func _resolve_contacts() -> void:
 				# When the player is caught the police car destroyed during the process
 				_destroy()
 				other.bust()
+				return       # we're dead; stop reading collisions
 
 		elif other.is_in_group("police"):
 			if _closing_speed(c, other) >= explode_impact_speed:
