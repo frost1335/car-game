@@ -76,7 +76,7 @@ func _chase(delta) -> void:
 		var radius = object.get_meta("radius", 20.0) # 20.0 is a default
 		var distance = to_object.length()
 		
-		var half_angular = rad_to_deg(asin(radius / distance))
+		var half_angular = rad_to_deg(asin(clampf(radius / distance, 0.0, 1.0)))
 		var margin = 30.0
 
 		# reset chosen direction
@@ -135,6 +135,7 @@ func _destroy() -> void:
 	if _dead:      # idempotent -- safe to call from the other car
 		return
 	_spawn_explosion()
+	_detach_trails()
 	_dead = true
 	exploded.emit(global_position)
 	queue_free()

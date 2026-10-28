@@ -43,12 +43,6 @@ var slip: float
 
 var _dead: bool = false
 
-func _ready() -> void:
-	trail_left = trail.instantiate()
-	trail_right = trail.instantiate()
-	get_tree().current_scene.add_child.call_deferred(trail_left)
-	get_tree().current_scene.add_child.call_deferred(trail_right)
-
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
 
@@ -67,10 +61,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	_post_move()
-	
+
+	_update_visuals(delta)
 
 	if not _dead:
-		_update_visuals(delta)
 		_handle_obstacle_impacts(pre_move_velocity)
 
 func _apply_resistance(delta: float) -> void:
@@ -152,25 +146,46 @@ func _post_move() -> void:
 func _destroy() -> void:
 	pass
 
+func _detach_trails() -> void:
+	if trail_left == null or trail_right == null:
+		return 
+
+	if trail_left.has_method("detach"):
+		trail_left.detach()
+	if trail_right.has_method("detach"):
+		trail_right.detach()
+
+	trail_left = null
+	trail_right = null
+
 func _update_visuals(delta: float) -> void:
+	var max_lean = 5 # How many pixels will the body sprite will lean
+	
 	$Visuals/WheelFL.rotation = steer_direction
 	$Visuals/WheelFR.rotation = steer_direction
 	
 	var forward_speed := velocity.dot(transform.x)      # signed: negative when reversing
 	_roll_distance += forward_speed * delta
 	var frame_index := posmod(int(_roll_distance / 32), 4)
+
+	var lean := clampf(velocity.dot(transform.y) * 0.02, -max_lean, max_lean)
 	
-	slip = absf(velocity.dot(transform.y))
-	
-	$Visuals/Body.position.y = velocity.dot(transform.y) * 1.3 * delta
-	$Visuals/Shadow.position.y = velocity.dot(transform.y) * 1.2 * delta
+	$Visuals/Body.position.y = lean
+	$Visuals/Shadow.position.y = lean * 1.5
 	
 	$Visuals/WheelFL.frame = frame_index
 	$Visuals/WheelFR.frame = frame_index
 	$Visuals/WheelRL.frame = frame_index
 	$Visuals/WheelRR.frame = frame_index
 	
-	if handbraking and slip > 120:
+	slip = absf(velocity.dot(transform.y))
+	#var speed := velocity.length()
+	var skidding := slip > 120.0
+	
+	if skidding:
+		if trail == null:
+			return
+
 		if trail_left and trail_right:
 			if trail_left.has_method("add_world_point") and trail_right.has_method("add_world_point"):
 				trail_left.add_world_point($Visuals/WheelRL.global_position)
@@ -182,10 +197,4 @@ func _update_visuals(delta: float) -> void:
 			get_tree().current_scene.add_child.call_deferred(trail_left)
 			get_tree().current_scene.add_child.call_deferred(trail_right)
 	else:
-		if trail_left and trail_right:
-			if trail_left.has_method("detach") and trail_right.has_method("detach"):
-				trail_left.detach()
-				trail_right.detach()
-
-		trail_left = null
-		trail_right = null
+		_detach_trails()

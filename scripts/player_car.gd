@@ -49,7 +49,9 @@ func bust() -> void:
 		return
 	_become_wreck()
 	_spawn_explosion()
+	_detach_trails()
 	_dead = true
+	handbraking = false
 	_bust_timer = bust_roll_time
 	busted.emit()
 
@@ -58,7 +60,9 @@ func _destroy() -> void:
 		return
 	_become_wreck()
 	_spawn_explosion()
+	_detach_trails()
 	_dead = true
+	handbraking = false
 	_bust_timer = 0.0          # zero timer = instant freeze, no roll-out
 	velocity = Vector2.ZERO
 	wrecked.emit(global_position)
@@ -71,7 +75,7 @@ func _bust_roll(delta: float) -> void:
 	steer_direction = 0.0       # controls are dead
 	var speed := velocity.length()
 	if speed > bust_speed:
-		velocity = velocity.normalized() * move_toward(speed / 1.3, bust_speed, bust_decel * delta)
+		velocity = velocity.normalized() * move_toward(speed, bust_speed, bust_decel * delta)
 
 func _check_police_contact() -> void:
 	# Needed because move_and_slide() only reports collisions caused by OUR
