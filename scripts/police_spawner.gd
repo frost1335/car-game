@@ -1,9 +1,9 @@
 extends Node2D
 
 @export var police_scene: PackedScene = preload("res://scenes/PoliceCar.tscn")   # drag PoliceCar.tscn into this slot
-@export var spawn_interval: float = 4.0    # seconds between spawns
+@export var spawn_interval: float = 1.0    # seconds between spawns
 @export var spawn_radius: float = 700.0    # distance from player; keep > view size
-@export var max_police: int = 5            # cap so you don't get swarmed
+@export var max_police: int = 15            # cap so you don't get swarmed
 
 var player: Node2D = null
 

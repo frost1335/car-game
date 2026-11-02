@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dm4fvspq2jnvx"]
+
+[ext_resource type="Texture2D" uid="uid://b0jtc3n858ra" path="res://assets/objects/rock_med.png" id="1_wttsr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5y4u"]
+radius = 45.099888
+
+[node name="RockBig" type="StaticBody2D" unique_id=2097794730]
+metadata/radius = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=928423861]
+shape = SubResource("CircleShape2D_o5y4u")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=341555250]
+scale = Vector2(4, 4)
+texture = ExtResource("1_wttsr")
+metadata/radius = 65.0

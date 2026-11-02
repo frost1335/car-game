@@ -54,14 +54,12 @@ flip_h = true
 vframes = 4
 
 [node name="WheelRL" type="Sprite2D" parent="Visuals" unique_id=870964967]
-z_index = 10
 position = Vector2(-34, -28)
 texture = ExtResource("4_v4b3c")
 flip_h = true
 vframes = 4
 
 [node name="WheelRR" type="Sprite2D" parent="Visuals" unique_id=1980571537]
-z_index = 10
 position = Vector2(-34, 28)
 texture = ExtResource("4_v4b3c")
 flip_h = true

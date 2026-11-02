@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dv2pdr4fxdhws"]
+
+[ext_resource type="Texture2D" uid="uid://bexcrxx0uvayx" path="res://assets/objects/rock_big.png" id="1_sb2rd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5y4u"]
+radius = 65.12296
+
+[node name="RockBig" type="StaticBody2D" unique_id=2097794730]
+z_index = 10
+metadata/radius = 65.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=928423861]
+shape = SubResource("CircleShape2D_o5y4u")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=341555250]
+position = Vector2(-4, -4)
+scale = Vector2(4, 4)
+texture = ExtResource("1_sb2rd")
+metadata/radius = 65.0
