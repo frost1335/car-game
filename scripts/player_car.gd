@@ -29,11 +29,11 @@ func _drive(delta: float) -> void:
 	raycasts.resize(16)
 	for i in 16:
 		var debug_ray_start = global_position
-		var debug_ray_end = global_position + Vector2(0, 400).rotated(global_rotation - (PI / 15) * (i))
+		var debug_ray_end = global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i))
 		var debug_ray_hit = false
 		
 		var space := get_world_2d().direct_space_state
-		var query := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 400).rotated(global_rotation - (PI / 15) * (i)), 1)
+		var query := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i)), 1)
 		
 		query.exclude = [get_rid()]
 		var hit := space.intersect_ray(query)
