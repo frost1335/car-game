@@ -23,7 +23,38 @@ signal wrecked(at_position: Vector2)
 
 var _bust_timer: float = 0.0
 
+var raycasts: Array[Dictionary] = []
+
 func _drive(delta: float) -> void:
+	raycasts.resize(16)
+	for i in 16:
+		var debug_ray_start = global_position
+		var debug_ray_end = global_position + Vector2(0, 400).rotated(global_rotation - (PI / 15) * (i))
+		var debug_ray_hit = false
+		
+		var space := get_world_2d().direct_space_state
+		var query := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 400).rotated(global_rotation - (PI / 15) * (i)), 1)
+		
+		query.exclude = [get_rid()]
+		var hit := space.intersect_ray(query)
+		
+		if hit:
+			debug_ray_end = hit.position
+			debug_ray_hit = true
+		else:
+			debug_ray_hit = false
+		
+		var raycast = {
+			"debug_ray_start":debug_ray_start,
+			"debug_ray_end": debug_ray_end,
+			"debug_ray_hit": debug_ray_hit
+		}
+		
+		raycasts[i] = raycast
+	
+	queue_redraw()
+
+	
 	if _dead:
 		if _bust_timer <= 0.0:
 			return                      # already finished, nothing to do
@@ -113,3 +144,15 @@ func _become_wreck() -> void:
 		$Visuals/Body.texture = wreck_texture
 	if has_node("Visuals/WreckSmoke"):
 		$Visuals/WreckSmoke.emitting = true
+
+
+func _draw() -> void:
+	if OS.is_debug_build():
+		
+		for raycast in raycasts:
+			var line_color = Color.RED if raycast.debug_ray_hit else Color.GREEN
+			
+			var local_start = to_local(raycast.debug_ray_start)
+			var local_end = to_local(raycast.debug_ray_end)
+			
+			draw_line(local_start, local_end, line_color, 2.0)

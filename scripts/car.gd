@@ -177,7 +177,7 @@ func _update_visuals(delta: float) -> void:
 	$Visuals/WheelFR.frame = frame_index
 	$Visuals/WheelRL.frame = frame_index
 	$Visuals/WheelRR.frame = frame_index
-	
+
 	slip = absf(velocity.dot(transform.y))
 	#var speed := velocity.length()
 	var skidding := slip > 120.0
