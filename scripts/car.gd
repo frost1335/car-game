@@ -8,7 +8,7 @@ class_name Car
 
 # - Steering (bicycle model) -
 @export var steering_angle: float = 15.0
-@export var wheel_base: float = 70.0
+@export var wheel_base: float = 80.0
 
 # - Traction -
 @export var traction_slow: float = 0.7
@@ -119,12 +119,17 @@ func _calculate_steering(delta: float) -> void:
 	rear_wheel += velocity * delta
 	front_wheel += velocity.rotated(steer_direction) * delta
 	var new_heading := rear_wheel.direction_to(front_wheel)
+	
+	print(velocity.length())
 
 	var grip := traction_slow
 	if velocity.length() > traction_speed_threshold:
 		grip = traction_fast
 	if handbraking:
 		grip = handbrake_traction
+		
+	
+	
 
 	var d := new_heading.dot(velocity.normalized())
 	if handbraking:

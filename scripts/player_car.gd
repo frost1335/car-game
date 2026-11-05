@@ -51,9 +51,7 @@ func _drive(delta: float) -> void:
 		}
 		
 		raycasts[i] = raycast
-	
 	queue_redraw()
-
 	
 	if _dead:
 		if _bust_timer <= 0.0:
@@ -156,3 +154,5 @@ func _draw() -> void:
 			var local_end = to_local(raycast.debug_ray_end)
 			
 			draw_line(local_start, local_end, line_color, 2.0)
+
+		draw_line(Vector2.ZERO, to_local(global_position + velocity * 0.5), Color.CYAN, 3.0)

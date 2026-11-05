@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b2r06jb2e1rhw"]
+
+[ext_resource type="PackedScene" uid="uid://dgpqs50mrwih5" path="res://scenes/Car.tscn" id="1_p4al5"]
+[ext_resource type="Script" uid="uid://8atqvgeid4yq" path="res://scripts/test_arena.gd" id="1_x6vdu"]
+[ext_resource type="Script" uid="uid://dnwi7tospm47n" path="res://scripts/police_spawner.gd" id="2_4ir4g"]
+[ext_resource type="PackedScene" uid="uid://bl0gm6e0e6xxk" path="res://scenes/GameOver.tscn" id="2_x6vdu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3unlm"]
+size = Vector2(5217.5, 72.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5y4u"]
+size = Vector2(450, 1094)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqoo"]
+size = Vector2(1484, 20)
+
+[node name="TestArena" type="Node2D" unique_id=856552485]
+script = ExtResource("1_x6vdu")
+
+[node name="Car" parent="." unique_id=1911748893 groups=["player"] instance=ExtResource("1_p4al5")]
+z_index = 3
+rotation = -1.5707964
+braking = null
+handbrake_steering_mult = null
+bust_roll_time = null
+bust_speed = null
+bust_decel = null
+engine_power = null
+max_speed = null
+max_reverse_speed = null
+steering_angle = null
+wheel_base = null
+traction_slow = null
+traction_fast = null
+traction_speed_threshold = null
+friction = null
+drag = null
+handbrake_friction = null
+handbrake_traction = null
+min_impact_speed = null
+impact_speed_loss = null
+push_scale = null
+wreck_impact_speed = null
+car_mass = null
+
+[node name="Node" type="Node2D" parent="." unique_id=580734397]
+script = ExtResource("2_4ir4g")
+
+[node name="outerWall" type="StaticBody2D" parent="." unique_id=297853311]
+position = Vector2(0, -2168)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="outerWall" unique_id=269125289]
+position = Vector2(2654, 1853)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="outerWall2" type="StaticBody2D" parent="." unique_id=81606329]
+position = Vector2(0, -2168)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="outerWall2" unique_id=363550740]
+position = Vector2(-2656, 1879)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="outerWall3" type="StaticBody2D" parent="." unique_id=2039312232]
+position = Vector2(0, -2168)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="outerWall3" unique_id=1383306567]
+position = Vector2(0, 3769)
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="outerWall4" type="StaticBody2D" parent="." unique_id=740266029]
+position = Vector2(0, -2168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="outerWall4" unique_id=784970793]
+shape = SubResource("RectangleShape2D_3unlm")
+
+[node name="house" type="StaticBody2D" parent="." unique_id=716458333]
+position = Vector2(-1992, -1309)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="house" unique_id=102451352]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="house2" type="StaticBody2D" parent="." unique_id=1994208304]
+position = Vector2(-1253, -1293)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="house2" unique_id=2006443810]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="house3" type="StaticBody2D" parent="." unique_id=5875639]
+position = Vector2(-493, -1293)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="house3" unique_id=561429053]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="fence" type="StaticBody2D" parent="." unique_id=216408373]
+position = Vector2(-1441, 870)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fence" unique_id=1525156891]
+shape = SubResource("RectangleShape2D_8uqoo")
+
+[node name="fence2" type="StaticBody2D" parent="." unique_id=918629720]
+position = Vector2(-1284, 1280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fence2" unique_id=1658579773]
+shape = SubResource("RectangleShape2D_8uqoo")
+
+[node name="fence3" type="StaticBody2D" parent="." unique_id=1548397075]
+position = Vector2(-232, 1475)
+rotation = 1.6194848
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fence3" unique_id=1092694960]
+shape = SubResource("RectangleShape2D_8uqoo")
+
+[node name="L" type="StaticBody2D" parent="." unique_id=329621535]
+position = Vector2(1586, -1389)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="L" unique_id=1426098256]
+position = Vector2(183, 273)
+polygon = PackedVector2Array(-1, 0, -1, 196, -249, 811, -649, 512, -364, 72, -372, 75, -376.67822, -158.24658, -379, -274, -1074, -232, -1104, -483, -11, -547)
+
+[node name="riverEdge" type="StaticBody2D" parent="." unique_id=1839286886]
+position = Vector2(2395, 636)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="riverEdge" unique_id=1345593151]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="riverEdge2" type="StaticBody2D" parent="." unique_id=1454200193]
+position = Vector2(1624, 636)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="riverEdge2" unique_id=2071212749]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="riverEdge3" type="StaticBody2D" parent="." unique_id=1128282543]
+position = Vector2(585, 654)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="riverEdge3" unique_id=209083314]
+shape = SubResource("RectangleShape2D_o5y4u")
+
+[node name="GameOver" parent="." unique_id=532564579 instance=ExtResource("2_x6vdu")]
+visible = false
