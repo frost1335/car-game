@@ -120,8 +120,10 @@ func _calculate_steering(delta: float) -> void:
 	front_wheel += velocity.rotated(steer_direction) * delta
 	var new_heading := rear_wheel.direction_to(front_wheel)
 	
-	print(velocity.length())
-
+	var transformed_heading = new_heading.x * transform.x + new_heading.y * transform.y
+	
+	print(transformed_heading)
+	
 	var grip := traction_slow
 	if velocity.length() > traction_speed_threshold:
 		grip = traction_fast
