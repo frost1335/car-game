@@ -17,6 +17,7 @@ signal exploded(at_position: Vector2)
 
 # Nearby objects list
 var nearby: Array[Node2D] = []
+var raycasts: Array[Dictionary] = []
 
 var target: Node2D = null
 var chasing: bool = true
@@ -39,6 +40,7 @@ func _drive(delta: float) -> void:
 
 	if chasing and target and is_instance_valid(target):
 		_chase(delta)
+		_handle_raycasts()
 	else:
 		_pull_over()
 
@@ -146,6 +148,44 @@ func _spawn_explosion() -> void:
 	var boom := explosion_scene.instantiate()
 	boom.global_position = global_position
 	get_tree().current_scene.add_child.call_deferred(boom)
+	
+func _handle_raycasts() -> void:
+	raycasts.resize(16)
+	
+	for i in 16:
+		var debug_ray_start = global_position
+		var debug_ray_end = global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i))
+		var debug_ray_hit = false
+		
+		var space := get_world_2d().direct_space_state
+		var query := PhysicsRayQueryParameters2D.create(debug_ray_start, debug_ray_end, 1)
+		
+		query.exclude = [get_rid()]
+		var hit := space.intersect_ray(query)
+		
+		var target_deg = rad_to_deg(transform.x.angle_to(target.global_position - global_position))
+		
+		print(rad_to_deg(debug_ray_start.angle_to(debug_ray_end)))
+		
+		var distance_from_obj;
+		
+		if hit:
+			debug_ray_end = hit.position
+			debug_ray_hit = true
+			distance_from_obj = ceil((global_position - hit.position).length() / 50)
+		else:
+			debug_ray_hit = false
+		
+		var raycast = {
+			"debug_ray_start":debug_ray_start,
+			"debug_ray_end": debug_ray_end,
+			"debug_ray_hit": debug_ray_hit,
+			"distance_from_obj": distance_from_obj
+		}
+		
+		raycasts[i] = raycast
+	queue_redraw()
+
 
 func _on_area_2d_body_entered(obj: Node2D) -> void:
 	nearby.append(obj)
@@ -155,3 +195,16 @@ func _on_area_2d_body_exited(obj: Node2D) -> void:
 
 	if idx != -1:
 		nearby.remove_at(idx)
+
+func _draw() -> void:
+	if OS.is_debug_build():
+		
+		for raycast in raycasts:
+			var line_color = Color.RED if raycast.debug_ray_hit else Color.GREEN
+			
+			var local_start = to_local(raycast.debug_ray_start)
+			var local_end = to_local(raycast.debug_ray_end)
+			
+			draw_line(local_start, local_end, line_color, 2.0)
+
+		draw_line(Vector2.ZERO, to_local(global_position + velocity * 0.5), Color.CYAN, 3.0)

@@ -26,33 +26,6 @@ var _bust_timer: float = 0.0
 var raycasts: Array[Dictionary] = []
 
 func _drive(delta: float) -> void:
-	raycasts.resize(16)
-	for i in 16:
-		var debug_ray_start = global_position
-		var debug_ray_end = global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i))
-		var debug_ray_hit = false
-		
-		var space := get_world_2d().direct_space_state
-		var query := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i)), 1)
-		
-		query.exclude = [get_rid()]
-		var hit := space.intersect_ray(query)
-		
-		if hit:
-			debug_ray_end = hit.position
-			debug_ray_hit = true
-		else:
-			debug_ray_hit = false
-		
-		var raycast = {
-			"debug_ray_start":debug_ray_start,
-			"debug_ray_end": debug_ray_end,
-			"debug_ray_hit": debug_ray_hit
-		}
-		
-		raycasts[i] = raycast
-	queue_redraw()
-	
 	if _dead:
 		if _bust_timer <= 0.0:
 			return                      # already finished, nothing to do
@@ -67,6 +40,7 @@ func _drive(delta: float) -> void:
 		_bust_roll(delta)
 	else:
 		_get_input()
+		_handle_raycasts()
 
 func _post_move() -> void:
 	_check_police_contact()
@@ -143,6 +117,37 @@ func _become_wreck() -> void:
 	if has_node("Visuals/WreckSmoke"):
 		$Visuals/WreckSmoke.emitting = true
 
+func _handle_raycasts() -> void:
+	raycasts.resize(16)
+	for i in 16:
+		var debug_ray_start = global_position
+		var debug_ray_end = global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i))
+		var debug_ray_hit = false
+		
+		var space := get_world_2d().direct_space_state
+		var query := PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i)), 1)
+		
+		query.exclude = [get_rid()]
+		var hit := space.intersect_ray(query)
+		
+		var distance_from_obj;
+		
+		if hit:
+			debug_ray_end = hit.position
+			debug_ray_hit = true
+			distance_from_obj = ceil((global_position - hit.position).length() / 50)
+		else:
+			debug_ray_hit = false
+		
+		var raycast = {
+			"debug_ray_start":debug_ray_start,
+			"debug_ray_end": debug_ray_end,
+			"debug_ray_hit": debug_ray_hit,
+			"distance_from_obj": distance_from_obj
+		}
+		
+		raycasts[i] = raycast
+	queue_redraw()
 
 func _draw() -> void:
 	if OS.is_debug_build():
