@@ -22,6 +22,8 @@ var raycasts: Array[Dictionary] = []
 var target: Node2D = null
 var chasing: bool = true
 
+var time_accumulated: float = 0.0
+
 func _ready() -> void:
 	add_to_group("police")
 	target = get_tree().get_first_node_in_group("player")
@@ -40,7 +42,12 @@ func _drive(delta: float) -> void:
 
 	if chasing and target and is_instance_valid(target):
 		_chase(delta)
-		_handle_raycasts()
+		
+		time_accumulated += delta
+		
+		if time_accumulated >= 0.1:
+			time_accumulated -= 0.1
+			_handle_raycasts()
 	else:
 		_pull_over()
 
@@ -154,33 +161,52 @@ func _handle_raycasts() -> void:
 	
 	for i in 16:
 		var debug_ray_start = global_position
-		var debug_ray_end = global_position + Vector2(0, 500).rotated(global_rotation - (PI / 15) * (i))
+		var debug_ray_end = global_position + Vector2(0, -500).rotated(global_rotation + (PI / 15) * (i))
 		var debug_ray_hit = false
 		
 		var space := get_world_2d().direct_space_state
 		var query := PhysicsRayQueryParameters2D.create(debug_ray_start, debug_ray_end, 1)
 		
 		query.exclude = [get_rid()]
+		
 		var hit := space.intersect_ray(query)
 		
 		var target_deg = rad_to_deg(transform.x.angle_to(target.global_position - global_position))
-		
-		print(rad_to_deg(debug_ray_start.angle_to(debug_ray_end)))
+		var ray_deg = rad_to_deg(transform.x.angle_to(debug_ray_end - debug_ray_start))
 		
 		var distance_from_obj;
+		
+		var interest = clampf(11 - round(abs(target_deg - ray_deg) / 9), 1, 10)
 		
 		if hit:
 			debug_ray_end = hit.position
 			debug_ray_hit = true
-			distance_from_obj = ceil((global_position - hit.position).length() / 50)
+			
+			distance_from_obj = roundf(11 - (global_position - hit.position).length() / 50)
+			interest = 0
+			
+			if raycasts[i - 1] && raycasts[i - 1].interest:
+				raycasts[i - 1].interest -= 10 / distance_from_obj
+					 
+				if distance_from_obj <= 5 && raycasts[i - 2] && raycasts[i - 2].interest:
+					raycasts[i - 2].interest -= 5 / distance_from_obj
 		else:
+			if raycasts[i - 1] && raycasts[i - 1].distance_from_obj:
+				interest -= 10 / raycasts[i - 1].distance_from_obj
+				
+				if raycasts[i - 2] && raycasts[i - 2].distance_from_obj && raycasts[i - 2].distance_from_obj <= 5:
+					interest -= 5 / raycasts[i - 2].distance_from_obj
+			
+			debug_ray_end = global_position + Vector2(0, -500 * (interest / 10)).rotated(global_rotation + (PI / 15) * (i))
 			debug_ray_hit = false
-		
+
 		var raycast = {
 			"debug_ray_start":debug_ray_start,
 			"debug_ray_end": debug_ray_end,
 			"debug_ray_hit": debug_ray_hit,
-			"distance_from_obj": distance_from_obj
+			"distance_from_obj": distance_from_obj,
+			"interest": interest,
+			"direction_deg": ray_deg
 		}
 		
 		raycasts[i] = raycast
@@ -201,10 +227,10 @@ func _draw() -> void:
 		
 		for raycast in raycasts:
 			var line_color = Color.RED if raycast.debug_ray_hit else Color.GREEN
-			
+
 			var local_start = to_local(raycast.debug_ray_start)
 			var local_end = to_local(raycast.debug_ray_end)
-			
+
 			draw_line(local_start, local_end, line_color, 2.0)
 
 		draw_line(Vector2.ZERO, to_local(global_position + velocity * 0.5), Color.CYAN, 3.0)
