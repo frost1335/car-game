@@ -120,25 +120,22 @@ func _calculate_steering(delta: float) -> void:
 	front_wheel += velocity.rotated(steer_direction) * delta
 	var new_heading := rear_wheel.direction_to(front_wheel)
 	
-	#var transformed_heading = new_heading.x * transform.x + new_heading.y * transform.y
-	#
-	#print(transformed_heading)
-	#
-	
 	var grip := traction_slow
 	if velocity.length() > traction_speed_threshold:
 		grip = traction_fast
 	if handbraking:
 		grip = handbrake_traction
-		
+
+	var transformed_heading = Vector2((new_heading.x * (velocity.length() * 0.7)), (new_heading.y * (velocity.length() * 1.2)))
 	
+	print(transformed_heading)
 	
 
 	var d := new_heading.dot(velocity.normalized())
 	if handbraking:
-		velocity = velocity.lerp(new_heading * velocity.length(), grip)
+		velocity = velocity.lerp(transformed_heading, grip)
 	elif d > 0:
-		velocity = velocity.lerp(new_heading * velocity.length(), grip)
+		velocity = velocity.lerp(transformed_heading, grip)
 	elif d < 0:
 		velocity = -new_heading * min(velocity.length(), max_reverse_speed)
 
